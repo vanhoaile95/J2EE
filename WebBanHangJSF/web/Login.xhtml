@@ -18,7 +18,7 @@
              
             <ui:define name="content">
                 <br/>
-                <h:form>
+                <h:form id="formid">
                     
                  <div class="login-wrap">
         <div class="login-html">
@@ -49,13 +49,28 @@
                          <h:message for="pass" />
                     </div>
                     <div class="group">
-                        <input id="check" type="checkbox" class="check" checked = "checked"/>
-                        <label for="check"><span class="icon"></span> Duy trỳ đăng nhập</label>
+                      
+                        <h:selectBooleanCheckbox  class="check" id="check" value="#{loginManagedBean.checkedduytri}">
+                            <f:ajax />
+                        </h:selectBooleanCheckbox>
+                        <label for="formid:check"><span class="icon"></span> Duy trỳ đăng nhập</label>
+                        
+                      
+                    
                     </div>
+                   
+                        
                     <div class="group">
                         <h:commandButton class ="button" action="#{loginManagedBean.login()}" value="Đăng nhập" >
                            
                         </h:commandButton>
+                        <br/>
+                        
+                        <c:choose>
+                            <c:when test="#{loginManagedBean.loginfailed == true}">
+                                <p style="text-align: center">Username hoặc Password sai !</p>
+                            </c:when>
+                         </c:choose>
                     </div>
                     <div class="hr"></div>
                     <div class="foot-lnk">

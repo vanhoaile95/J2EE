@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
        
     <meta charset="utf-8" />
@@ -245,7 +246,8 @@
             </c:when>
             <c:otherwise>
                 
-                <li style="float:right"><a href="#"><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.userloginsession} <b class="caret"></b></a></li>
+                <li style="float:right"><a href="#"><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.userloginsession.toUpperCase()} <b class="fa fa-caret-right"></b></a></li>
+                
                 
             </c:otherwise>
         </c:choose>

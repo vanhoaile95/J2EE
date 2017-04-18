@@ -25,6 +25,24 @@ public class LoginManagedBean implements Serializable{
     private String pass;
     private String userloginsession;
     public boolean checkeddangky = false;
+    public boolean loginfailed = false;
+    public boolean checkedduytri = true;
+
+    public boolean isCheckedduytri() {
+        return checkedduytri;
+    }
+
+    public void setCheckedduytri(boolean checkedduytri) {
+        this.checkedduytri = checkedduytri;
+    }
+
+    public boolean isLoginfailed() {
+        return loginfailed;
+    }
+
+    public void setLoginfailed(boolean loginfailed) {
+        this.loginfailed = loginfailed;
+    }
 
     public boolean isCheckeddangky() {
         return checkeddangky;
@@ -77,6 +95,7 @@ public class LoginManagedBean implements Serializable{
     
     public void checklogin()
     {
+        //Check khi vào page thì có login chưa ,, nếu chưa thì redirect sang Login
          HttpSession hs = Util.getSession();
          userloginsession = (String) hs.getAttribute("username");
          if(userloginsession == null)
@@ -104,18 +123,23 @@ public class LoginManagedBean implements Serializable{
         
         if(pass.equals(value))
             {
+              
                 HttpSession hs = Util.getSession();
                 hs.setAttribute("username",user);
+                userloginsession = user;
+               
+                loginfailed = false;
                 
                 return "Home?faces-redirect=true";
             }
-        
+      loginfailed = true;
       return "Login";
         
       
     }
     public String logout()
     {
+        
         return "Login";
     }
 }
