@@ -12,7 +12,7 @@ public class ConnectSQL {
  public Connection getConnectDB()
  {
      try{
-         String url="jdbc:sqlserver://localhost:1433;databaseName=J2EE";
+         String url="jdbc:sqlserver://localhost:1433;databaseName=QLBanHang";
          String user="sa";
          String pass="sa";
          Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
