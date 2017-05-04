@@ -6,6 +6,7 @@
 package Controller;
 
 import Database.ConnectSQL;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.*;
 
@@ -84,14 +85,16 @@ public class LoginManagedBean implements Serializable{
         try{
              FacesContext fc = FacesContext.getCurrentInstance();
               fc.getExternalContext().redirect(page);
-        }catch(Exception e){}
+        }catch(IOException e){}
     }
  
+    //Ham kiểm tra khi nhấn nút đăng ký thì page Login.xhtml sẽ tự click button Đăng ký
     public String checkdangky(boolean check)
     {
         this.checkeddangky = check;
-        return "Login";
+        return "Login?faces-redirect=true";
     }
+    
     
     public void checklogin()
     {
@@ -100,7 +103,7 @@ public class LoginManagedBean implements Serializable{
          userloginsession = (String) hs.getAttribute("username");
          if(userloginsession == null)
          {
-             redirect("Login.xhtml");
+             //redirect("Login.xhtml");
          } 
          
     }
@@ -118,7 +121,7 @@ public class LoginManagedBean implements Serializable{
             rs.next();
             value = rs.getString("Password");
            
-        }catch(Exception e){}
+        }catch(SQLException e){}
         
         
         if(pass.equals(value))
@@ -139,8 +142,11 @@ public class LoginManagedBean implements Serializable{
     }
     public String logout()
     {
+        userloginsession = null;
+        HttpSession hs = Util.getSession();
+        hs.setAttribute("username",null);
+        return "Home?faces-redirect=true";
         
-        return "Login";
     }
 }
     
