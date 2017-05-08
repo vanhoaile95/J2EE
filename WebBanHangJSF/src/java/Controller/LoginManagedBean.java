@@ -14,7 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
+import Model.*;
 
 
 @ManagedBean
@@ -22,63 +22,42 @@ import javax.servlet.http.HttpSession;
 public class LoginManagedBean implements Serializable{
 
    
-    private String user;
-    private String pass;
-    private String userloginsession;
-    public boolean checkeddangky = false;
-    public boolean loginfailed = false;
-    public boolean checkedduytri = true;
+    
+    public boolean PageDangKy = false;
+    public Register ModelDangKy = new Register();
+    public Login ModelLogin = new Login();
 
-    public boolean isCheckedduytri() {
-        return checkedduytri;
+    public boolean isPageDangKy() {
+        return PageDangKy;
     }
 
-    public void setCheckedduytri(boolean checkedduytri) {
-        this.checkedduytri = checkedduytri;
-    }
-
-    public boolean isLoginfailed() {
-        return loginfailed;
-    }
-
-    public void setLoginfailed(boolean loginfailed) {
-        this.loginfailed = loginfailed;
-    }
-
-    public boolean isCheckeddangky() {
-        return checkeddangky;
-    }
-
-    public void setCheckeddangky(boolean checkeddangky) {
-        this.checkeddangky = checkeddangky;
-    }
-
-   
-
-    public String getUserloginsession() {
-        return userloginsession;
-    }
-
-    public void setUserloginsession(String userloginsession) {
-        this.userloginsession = userloginsession;
+    public void setPageDangKy(boolean PageDangKy) {
+        this.PageDangKy = PageDangKy;
     }
 
     
-    public String getPass() {
-        return pass;
+    public Register getModelDangKy() {
+        return ModelDangKy;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setModelDangKy(Register ModelDangKy) {
+        this.ModelDangKy = ModelDangKy;
     }
 
-    public String getUser() {
-        return user;
+    public Login getModelLogin() {
+        return ModelLogin;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setModelLogin(Login ModelLogin) {
+        this.ModelLogin = ModelLogin;
     }
+
+
+
+  
+   
+
+   
     
     private void redirect(String page)
     {
@@ -89,9 +68,9 @@ public class LoginManagedBean implements Serializable{
     }
  
     //Ham kiểm tra khi nhấn nút đăng ký thì page Login.xhtml sẽ tự click button Đăng ký
-    public String checkdangky(boolean check)
+    public String directpagedangky(boolean check)
     {
-        this.checkeddangky = check;
+        this.PageDangKy = check;
         return "Login?faces-redirect=true";
     }
     
@@ -100,8 +79,8 @@ public class LoginManagedBean implements Serializable{
     {
         //Check khi vào page thì có login chưa ,, nếu chưa thì redirect sang Login
          HttpSession hs = Util.getSession();
-         userloginsession = (String) hs.getAttribute("username");
-         if(userloginsession == null)
+         this.ModelLogin.Session = (String) hs.getAttribute("username");
+         if(this.ModelLogin.Session == null)
          {
              //redirect("Login.xhtml");
          } 
@@ -111,9 +90,9 @@ public class LoginManagedBean implements Serializable{
     {
         ConnectSQL Db = new ConnectSQL();
         Connection conn =  Db.getConnectDB();
-        
+       
    
-        String query = "Select Password from UserLogin where Username ='" + user + "'";
+        String query = "Select Password from UserLogin where Username ='" + this.ModelLogin.Username + "'";
         String value = null;
         try{
             Statement  stm = conn.createStatement();
@@ -124,28 +103,104 @@ public class LoginManagedBean implements Serializable{
         }catch(SQLException e){}
         
         
-        if(pass.equals(value))
+        if(this.ModelLogin.Password.equals(value))
             {
               
                 HttpSession hs = Util.getSession();
-                hs.setAttribute("username",user);
-                userloginsession = user;
+                hs.setAttribute("username",this.ModelLogin.Username);
+                this.ModelLogin.Session = this.ModelLogin.Username;
                
-                loginfailed = false;
+              
+                this.ModelLogin.ErrorMessage = "Tài khoản hoặc password sai, vui lòng nhập lại !";
                 
                 return "Home?faces-redirect=true";
             }
-      loginfailed = true;
+        
+      
       return "Login";
         
       
     }
     public String logout()
     {
-        userloginsession = null;
+       this.ModelLogin.Session = null;
         HttpSession hs = Util.getSession();
         hs.setAttribute("username",null);
         return "Home?faces-redirect=true";
+        
+    }
+    
+    public String register()
+    {
+        
+        //Kiểm tra độ dài user
+         if(this.ModelDangKy.Username.length()  < 4)
+        {
+             this.ModelDangKy.ErrorMessage = "Tài khoản tối thiểu 4 ký tự !";
+                       return "Login";
+        }
+        //Kiểm tra nhập 2 lần mật khẩu trùng nhau ko
+        if(!this.ModelDangKy.Password.equals(this.ModelDangKy.RePassword))
+        {
+            this.ModelDangKy.ErrorMessage = "'Mật khẩu' và 'Nhập lại mật khẩu' không chính xác !";
+                       return "Login";
+        }
+        //Kiểm tra độ dài mật khẩu
+        if(this.ModelDangKy.Password.length()  < 6)
+        {
+             this.ModelDangKy.ErrorMessage = "Mật khẩu tối thiểu 6 ký tự !";
+                       return "Login";
+        }
+        
+      
+         ConnectSQL Db = new ConnectSQL();
+        Connection conn =  Db.getConnectDB();
+       
+   
+        String query = "Select Username from UserLogin";
+        String value = null;
+        try{
+            Statement  stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            
+            while(rs.next())
+            {
+                value = rs.getString("Username");
+                if (this.ModelDangKy.Username.equals(value))
+                {
+                       this.ModelDangKy.ErrorMessage = "Tài khoản này đã được đăng ký ,vui lòng nhập tài khoản khác !";
+                       return "Login";
+                }
+            
+            }
+           
+        }catch(SQLException e){}
+     
+        //Nếu đăng ký thành công
+        query = "INSERT INTO UserLogin (Username,Password,PermissionID) VALUES (?,?,?)";
+        
+        try{
+           
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1, this.ModelDangKy.Username);
+            p.setString(2, this.ModelDangKy.Password);
+            p.setString(3, "2");
+            p.executeQuery();
+            
+             
+             
+        }catch(SQLException e){}
+        
+        
+        
+      
+                HttpSession hs = Util.getSession();
+                hs.setAttribute("username",this.ModelDangKy.Username);
+                this.ModelLogin.Session = this.ModelDangKy.Username;
+               
+           
+                return "Home?faces-redirect=true";
+        
         
     }
 }

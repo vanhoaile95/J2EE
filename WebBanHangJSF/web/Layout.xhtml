@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'/>
    
+
+   
   
     <ui:insert name ="LoginCSS"/>
  
@@ -72,6 +74,8 @@
             <h:form>
             <h:commandLink class="navbar-brand" action ="Home.xhtml?faces-redirect=true" style="margin-top:0.1cm"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</h:commandLink>
             </h:form>
+            
+            
         </div>
 
 
@@ -174,7 +178,7 @@
                 
                 <!--Giới thiệu-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Gioithieu.png" width="32" height="32" />Giới thiệu </a>
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Gioithieu.png" width="32" height="32" />Giới thiệu </a>
                 </li>
                 <!--Liên hệ-->
                 <li class="dropdown">
@@ -237,21 +241,91 @@
     <!--Brand icon-->
     <ul class="topnav" style="background-image:url('./resources/Image/heade.png');height:130px;" id="topbackground" >
         <c:choose>
-            <c:when test="#{loginManagedBean.userloginsession == null}">
+            <c:when test="#{loginManagedBean.modelLogin.session == null}">
                 <h:form>
               
-                 <li style="float:right"><h:commandLink action="#{loginManagedBean.checkdangky(false)}"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</h:commandLink></li>
-                 <li style="float:right"><h:commandLink action="#{loginManagedBean.checkdangky(true)}"><i class="fa fa-user-plus" aria-hidden="true"></i> Đăng ký</h:commandLink></li>
+                 <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(false)}"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</h:commandLink></li>
+                 <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(true)}"><i class="fa fa-user-plus" aria-hidden="true"></i> Đăng ký</h:commandLink></li>
                  </h:form>
                  
             </c:when>
             <c:otherwise>
+              
+                <li style="float:right"><a style="cursor:pointer" onclick="openNav1()" ><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.modelLogin.session.toUpperCase()} <b class="fa fa-caret-right"></b></a></li>
+                 
+            <!--Sidebar-->
+                <style>
+
+                 .sidenav {
+                     height: 100%; /* 100% Full-height */
+                     width: 0; /* 0 width - change this with JavaScript */
+                     position: fixed; /* Stay in place */
+                     z-index: 1; /* Stay on top */
+                     top: 0;
+                     right: 0;
+                     background-color: #111; /* Black*/
+                     overflow-x: hidden; /* Disable horizontal scroll */
+                     padding-top: 60px; /* Place content 60px from the top */
+                     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+                 }
+
+                     .sidenav a {
+                         padding: 8px 8px 8px 32px;
+                         text-decoration: none;
+                         font-size: 25px;
+                         color: #818181;
+                         display: block;
+                         transition: 0.3s;
+
+                     }
+
+                         .sidenav a:hover, .offcanvas a:focus {
+                             color: #f1f1f1;
+                         }
+
+                     .sidenav .closebtn {
+                         position: absolute;
+                         top: 1.4cm;
+                         right: 25px;
+                         font-size: 36px;
+                         margin-left: 50px;
+                     }
+
+
+
+             </style>
+                 <div id="mySidenavLog" class="sidenav">
+                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+              
+                 <a style="color: #f1f1f1; background-color: #4caf50"> #{loginManagedBean.modelLogin.session.toUpperCase()}</a>
                 <h:form>
-                <li style="float:right"><h:commandLink action="#{loginManagedBean.logout()}"><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.userloginsession.toUpperCase()} <b class="fa fa-caret-right"></b></h:commandLink></li>
-                 
-                 
-                   
+                    #{loginManagedBean.modelLogin.firstAccessAdminPage = false}
+                    <a href="AdminPage/QLKhachHang.xhtml">Quản lý</a>
+                    
+                     <a href="#">Chi tiết</a>
+                     <a href="#">Đổi mật khẩu</a>
+                     <h:commandLink action="#{loginManagedBean.logout()}">Đăng xuất</h:commandLink>
                 </h:form>
+                 </div>
+               <script>
+
+                     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+                     function openNav1() {
+                         document.getElementById("mySidenavLog").style.width = "280px";
+
+                     }
+
+                     /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+                     function closeNav1() {
+                         document.getElementById("mySidenavLog").style.width = "0";
+
+                     }
+
+
+                 </script>
+
+                   
+               
                 
                 
             </c:otherwise>
@@ -304,7 +378,6 @@
     <ui:insert name ="content"/>
    
    
- 
 
 
 

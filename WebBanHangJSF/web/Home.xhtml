@@ -14,6 +14,19 @@
            <ui:define name ="title">Trang chủ</ui:define>
             <ui:define name="content">
                 
+         
+           
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src = "https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src = "https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css"/>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+ 
+ 
+     
+	
+
+             
                 
                 <!-- Hàm luôn gọi khi rendered page -->
               <f:metadata>
@@ -51,7 +64,7 @@
             <h4 style="color:white">Kích thước : S M L XL</h4>
             <h4 style="color:white">Size chuẩn : Cân nặng 47kg , Chiều cao : 1m60-1m65</h4>
             <h2 style="color:#4CAF50">Giá : 100,000 VNĐ</h2>
-            <h4 style="color:white">Số lượng</h4>
+            <h4 style="color:white" >Số lượng</h4>
 
             <input class="form-control" type="text" style="width:50px" value="1"  />
 
@@ -144,93 +157,123 @@
     <button class="accordion" style="background-color: #4caf50;color:#fff;font-weight:bold"><img src="./resources/Image/New.png" width="75" height="50" />Sản phẩm mới  </button>
     <div class="panel show">
 
+        <script>
+        $(document).ready(function() {
+           $('#example').dataTable( {
+             "iDisplayLength": 1,
+             "bSort": false,
+              "bLengthChange": false,
+              "sPaginationType": "numbers",
+              "oLanguage": {
+                "sSearch": "Tìm kiếm :",
+                "sInfo": "",
+                 "sZeroRecords": "Không tìm thấy sản phẩm nào",
+                   "sInfoFiltered": "",
+                    "sInfoEmpty": "",
+            }
+             });
+        } );
+	</script>
         <!--Danh sách-->
-        <div class="container-fluid" id="Danhsach">
-
-            <!--Row1-->
-            <div class="row">
-                <div class="col-sm-3" style="width: 240px; text-align: center">
+        <table id="example" class="table"  cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center">
+                 
                     <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm dạ hội TH</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 100,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+              
+                </td>
+                
+                 <td style="text-align: center">
+                
+                    <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold; "> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+              
+                </td>
+                
+                 <td style="text-align: center">
+               
+                 <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+             
+                </td >
+                
+                 <td style="text-align: center">
+                
+                  <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+                
+                </td>
+               
+            </tr>
+            
+              <tr>
+                <td style="text-align: center">
+                 
+                    <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+              
+                </td>
+                
+                 <td style="text-align: center">
+                
+                    <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold; "> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+              
+                </td>
+                
+                 <td style="text-align: center">
+               
+                 <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+             
+                </td >
+                
+                 <td style="text-align: center">
+                
+                  <img src="./resources/Image/SP9.png" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
+                    <p style="text-align: center; font-weight: bold;"> Đầm dạ hội TH</p>
+                    <p style="text-align: center; color: #ff0000;"> Giá : 100,000 VNĐ</p>
+                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white;" onclick="openNav($('#AnhSP').attr('src'))"> Chi tiết</button>
+                
+                </td>
+               
+            </tr>
+            
+          
+            
+           
+          
+          
+        </tbody>
+    </table>
+        
+      
 
-                <div class="col-sm-3" style=" width: 240px; text-align: center">
-                    <img src="./resources/Image/SP1.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm hoa bông</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 150,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-3" style=" width: 240px; text-align: center">
-                    <img src="./resources/Image/SP2.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm black</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 200,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-3" style="width: 240px;text-align:center">
-                    <img src="./resources/Image/SP3.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align:center;font-weight:bold;margin-left:1cm"> Đầm hoa silver</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 300,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-            </div>
-
-            <br />
-            <!--Row2-->
-            <div class="row">
-                <div class="col-sm-3" style="width: 240px; text-align: center">
-                    <img src="./resources/Image/SP4.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm dạ hội TY</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 100,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-3" style=" width: 240px; text-align: center">
-                    <img src="./resources/Image/SP5.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm tím</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 150,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-3" style=" width: 240px; text-align: center">
-                    <img src="./resources/Image/SP6.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm stylist</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 200,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-3" style="width: 240px;text-align:center">
-                    <img src="./resources/Image/SP7.jpg" width="240" height="400" style="cursor:pointer" id="Anhhover" onclick="openNav($(this).attr('src'))" />
-                    <p style="text-align: center; font-weight: bold; margin-left: 1cm"> Đầm trẻ trung SK</p>
-                    <p style="text-align: center; color: #ff0000; margin-left: 1cm"> Giá : 300,000 VNĐ</p>
-                    <button class=" btn btn-default" style="background-color: #4CAF50; color: white; margin-left: 1cm"> Chi tiết</button>
-                </div>
-            </div>
-        </div>
-
-        <!--Nút Phân trang-->
-
-        <ul class="pagination" style="float:right">
-            <li><a href="#">«</a></li>
-            <li><a href="#" class="kichhoat">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
-        <link href="./resources/CSS/Pagination.css" rel="stylesheet" />
-        <!--Nút Phân trang-->
+       
 
     </div>
     <link href="./resources/CSS/Accordion.css" rel="stylesheet" />

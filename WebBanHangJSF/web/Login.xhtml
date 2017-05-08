@@ -18,39 +18,39 @@
              
             <ui:define name="content">
                 <br/>
-                <h:form id="formid">
+              
                     
                  <div class="login-wrap">
         <div class="login-html">
             <c:choose>
-                <c:when test="#{loginManagedBean.checkeddangky == true}">
-                     <input id="tab-1" type="radio" name="tab" class="sign-in"   /><label for="tab-1" class="tab" style="cursor: pointer">Đăng nhập</label>
+                <c:when test="#{loginManagedBean.pageDangKy == true}">
                       <input id="tab-2" type="radio" name="tab" class="sign-up" checked="checked" /><label for="tab-2" class="tab" style="cursor: pointer">Đăng ký</label>
                 </c:when>
                 <c:otherwise>
                       <input id="tab-1" type="radio" name="tab" class="sign-in"  checked="checked"/><label for="tab-1" class="tab" style="cursor: pointer">Đăng nhập</label>
-                      <input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab" style="cursor: pointer">Đăng ký</label>
+                      <input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab" style="cursor: pointer"></label>
                 </c:otherwise>
             </c:choose>
           
             
             <div class="login-form">
+                  <h:form id="formid">
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="user" class="label" >Tài khoản</label>
                       
-                        <h:inputText id="user" required="true" requiredMessage="Chưa nhập Username" class="input" value ="#{loginManagedBean.user}"  ></h:inputText>
+                        <h:inputText id="user" required="true" requiredMessage="Chưa nhập Username" class="input" value ="#{loginManagedBean.modelLogin.username}"  ></h:inputText>
                          <h:message for="user" />
                     </div>
                     <div class="group">
                         <label for="pass" class="label">Mật khẩu</label>
                       
-                        <h:inputSecret id="pass"  class="input" value="#{loginManagedBean.pass}" required="true"  requiredMessage="Chưa nhập Password"></h:inputSecret>
+                        <h:inputSecret id="pass"  class="input" value="#{loginManagedBean.modelLogin.password}" required="true"  requiredMessage="Chưa nhập Password"></h:inputSecret>
                          <h:message for="pass" />
                     </div>
                     <div class="group">
                       
-                        <h:selectBooleanCheckbox  class="check" id="check" value="#{loginManagedBean.checkedduytri}">
+                        <h:selectBooleanCheckbox  class="check" id="check" value="#{loginManagedBean.modelLogin.duytriLogin}">
                             <f:ajax />
                         </h:selectBooleanCheckbox>
                         <label for="formid:check"><span class="icon"></span> Duy trỳ đăng nhập</label>
@@ -62,13 +62,13 @@
                         
                     <div class="group">
                         <h:commandButton class ="button" action="#{loginManagedBean.login()}" value="Đăng nhập" >
-                           
+                         
                         </h:commandButton>
                         <br/>
                         
                         <c:choose>
-                            <c:when test="#{loginManagedBean.loginfailed == true}">
-                                <p style="text-align: center">Username hoặc Password sai !</p>
+                            <c:when test="#{loginManagedBean.modelLogin.errorMessage.length() > 0}">
+                                <p style="text-align: center">#{loginManagedBean.modelLogin.errorMessage}</p>
                             </c:when>
                          </c:choose>
                     </div>
@@ -77,33 +77,59 @@
                         <a href="#forgot">Quên Password?</a>
                     </div>
                 </div>
+                </h:form>
+                
+                <h:form>
                 <div class="sign-up-htm">
                     <div class="group">
-                        <label for="user" class="label">Tài khoản</label>
-                        <input id="user" type="text" class="input"/>
+                        <label for="user1" class="label">Tài khoản</label>
+                        <h:inputText id="user1" required="true" requiredMessage="Chưa nhập Username" class="input" value ="#{loginManagedBean.modelDangKy.username}"  ></h:inputText>
+                         <h:message for="user1" />
+
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Mật khẩu</label>
-                        <input id="pass" type="password" class="input" data-type="password"/>
+                        <label for="pass1" class="label">Mật khẩu</label>
+                        <h:inputSecret id="pass1"  class="input" value="#{loginManagedBean.modelDangKy.password}" required="true"  requiredMessage="Chưa nhập Password"></h:inputSecret>
+                         <h:message for="pass1" />
+                        
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Nhập lại mật khẩu</label>
-                        <input id="pass" type="password" class="input" data-type="password"/>
+                         <label for="pass2" class="label">Nhập lại mật khẩu</label>
+                         <h:inputSecret id="pass2"  class="input" required="true" value="#{loginManagedBean.modelDangKy.rePassword}" requiredMessage="Chưa nhập Password"></h:inputSecret>
+                         <h:message for="pass2" />
                     </div>
                     <div class="group">
-                        <label for="pass" class="label">Email</label>
-                        <input id="pass" type="text" class="input"/>
+                        <label for="email" class="label">Email</label>
+                        <h:inputText id="email" validatorMessage="Email sai cú pháp " requiredMessage="Chưa nhập Email" required="true" value="#{loginManagedBean.modelDangKy.email}" class="input">
+                             <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" 
+                            />
+                        </h:inputText>
+                         <h:message for="email" />
+                        
+                        
+                      
+                       
                     </div>
                     <div class="group">
-                        <input type="submit" class="button" value="Đăng ký"/>
+                        
+                        <h:commandButton class ="button" action="#{loginManagedBean.register()}" value="Đăng ký" >
+                        </h:commandButton>
+                        <hr/>
+                         <c:choose>
+                             <c:when test="#{loginManagedBean.modelDangKy.errorMessage.length() > 0}">
+                                 <p style="text-align: center">#{loginManagedBean.modelDangKy.errorMessage}</p>
+                            </c:when>
+                         </c:choose>
                     </div>
                     <div class="hr"></div>
 
                 </div>
+                    </h:form>
             </div>
         </div>
     </div>
-                    </h:form>
+                    
             </ui:define>
         </ui:composition>
     </h:body>

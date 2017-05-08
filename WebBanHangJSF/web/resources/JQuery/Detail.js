@@ -100,11 +100,13 @@ var resizefunction = null;
 
 
 function openNav(ImageName) {
+   
     document.getElementById("myNav").style.height = "100%";
+    document.getElementById("myNav").scrollTop = 0;
     $('html,body').css('overflow', 'hidden'); // Tắt scroll
     $('#AnhDetail').attr("src", ImageName);
     $('#close').css('position', 'fixed');
-    
+  
    
 
     //Tắt scroll mượt
