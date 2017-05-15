@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+       
+
+    </h:head>
+    <h:body>
+        <ui:composition  template= " AdminLayout.xhtml">
+            
+             <ui:define name ="title">Quản lý đơn hàng</ui:define>
+             <ui:define name="ChucNang">
+                <a class="navbar-brand" href="#">
+                     Quản lý đơn hàng
+
+                    </a>
+            </ui:define>
+            <ui:define name="content">
+                <br/>
+              
+                    <h:form>
+                        <div class="form-group">
+                            <label for="sel1">Trạng Thái</label>
+                            <select class="form-control" id="sel1" style="width: 200px">
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                        </select>
+                        </div>
+                     
+                                <table class="table">
+                                    <thead>
+                                        <th>STT</th>
+                                    	<th>Đơn Hàng</th>
+                                    	<th>Giá trị</th>
+                                        <th>Ngày lập</th>
+                                        <th>Trạng thái</th>
+                                        <th>Người Duyệt</th>
+                                    	<th>Thao tác</th>
+                                    	
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        	<td>1</td>
+                                        	<td>0001</td>
+                                                <td>20000</td>
+                                                <td >11/05/2017</td>
+                                                <td>Đã duyệt</td>
+                                        	<td ></td>
+                                                <td >	
+                                                    
+                                                       
+                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Xem" style="background: url(assets/img/Display20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Duyệt Đơn" style="background: url(assets/img/Chot.png); border: none; height: 30px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                    <h:commandButton action="#{loginManagedBean.login()}" title="In Đơn Hàng" style="background: url(assets/img/Printer20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Xóa Đơn" style="background: url(assets/img/Delete20.png); border: none; height: 20px; width: 20px; "></h:commandButton>
+<!--                                                    <a href="../Login.xhtml"><img src="assets/img/Display20.png" alt="" title="Xem" />&nbsp;&nbsp;
+                                                    </a>
+                                                    <img src="assets/img/Chot.png" alt="" title="Duyệt Đơn"/>&nbsp;&nbsp;
+                                                    <img src="assets/img/Printer20.png" alt="" title="In Đơn Hàng"/>&nbsp;&nbsp;
+                                                    <img src="assets/img/Delete20.png" alt="" title="Xóa Đơn"/>-->
+                                                </td>
+                                        	
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                             
+                    </h:form>
+                    
+         
+                
+                    
+            </ui:define>
+             <script>
+                            $(document).ready(function () {
+               $('.btn-filter').on('click', function () {
+                   var $target = $(this).data('target');
+                   if ($target != 'all') {
+                       $('.table tbody tr').css('display', 'none');
+                       $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+                   } else {
+                       $('.table tbody tr').css('display', 'none').fadeIn('slow');
+                   }
+               });
+
+               $('#checkall').on('click', function () {
+                   if ($("#mytable #checkall").is(':checked')) {
+                       $("#mytable input[type=checkbox]").each(function () {
+                           $(this).prop("checked", true);
+                       });
+
+                   } else {
+                       $("#mytable input[type=checkbox]").each(function () {
+                           $(this).prop("checked", false);
+                       });
+                   }
+               });
+           });
+
+             </script>
+        </ui:composition>
+        
+    </h:body>
+</html>
+
