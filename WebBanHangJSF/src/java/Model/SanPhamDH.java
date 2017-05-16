@@ -10,6 +10,8 @@ package Model;
  * @author phanlam
  */
 public class SanPhamDH {
+    
+    String STT;
     String tenSP;
     int Soluong;
     String giaSP;
@@ -18,6 +20,14 @@ public class SanPhamDH {
     String maSP;
     String thanhTien;
 
+    public String getSTT() {
+        return STT;
+    }
+
+    public void setSTT(String STT) {
+        this.STT = STT;
+    }
+    
     public void setThanhTien(String thanhTien) {
         this.thanhTien = thanhTien;
     }

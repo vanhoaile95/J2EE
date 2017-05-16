@@ -24,49 +24,68 @@
               
                     <h:form>
                         <div class="form-group">
+                            
                             <label for="sel1">Trạng Thái</label>
-                            <select class="form-control" id="sel1" style="width: 200px">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                        </select>
+                            <h:selectOneMenu class="form-control"  style="width: 200px" onchange="submit()" valueChangeListener="#{donHangManagedBean.TimKiem(this.value)}">
+                                <f:selectItem itemValue="3" itemLabel="Tất Cả" ></f:selectItem>
+                                <f:selectItem itemValue="0" itemLabel="Chưa Duyệt" ></f:selectItem>
+                                <f:selectItem itemValue="2" itemLabel="Đã Duyệt" ></f:selectItem>
+                                <f:selectItem itemValue="1" itemLabel="Đã Xóa" ></f:selectItem>
+                            </h:selectOneMenu>
+                            
+                            
+                            
                         </div>
+                        
                      
                                 <table class="table">
                                     <thead>
                                         <th>STT</th>
                                     	<th>Đơn Hàng</th>
-                                    	<th>Giá trị</th>
                                         <th>Ngày lập</th>
+                                    	<th>Giá trị</th>
+                                        
                                         <th>Trạng thái</th>
                                         <th>Người Duyệt</th>
                                     	<th>Thao tác</th>
                                     	
                                     </thead>
                                     <tbody>
+                                        <c:forEach var="DonHang" items="#{donHangManagedBean.donHang.listDH}" >
                                         <tr>
-                                        	<td>1</td>
-                                        	<td>0001</td>
-                                                <td>20000</td>
-                                                <td >11/05/2017</td>
-                                                <td>Đã duyệt</td>
-                                        	<td ></td>
-                                                <td >	
-                                                    
-                                                       
-                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Xem" style="background: url(assets/img/Display20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
-                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Duyệt Đơn" style="background: url(assets/img/Chot.png); border: none; height: 30px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
-                                                    <h:commandButton action="#{loginManagedBean.login()}" title="In Đơn Hàng" style="background: url(assets/img/Printer20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
-                                                    <h:commandButton action="#{loginManagedBean.login()}" title="Xóa Đơn" style="background: url(assets/img/Delete20.png); border: none; height: 20px; width: 20px; "></h:commandButton>
-<!--                                                    <a href="../Login.xhtml"><img src="assets/img/Display20.png" alt="" title="Xem" />&nbsp;&nbsp;
-                                                    </a>
-                                                    <img src="assets/img/Chot.png" alt="" title="Duyệt Đơn"/>&nbsp;&nbsp;
-                                                    <img src="assets/img/Printer20.png" alt="" title="In Đơn Hàng"/>&nbsp;&nbsp;
-                                                    <img src="assets/img/Delete20.png" alt="" title="Xóa Đơn"/>-->
+                                        	<td>#{DonHang.STT}</td>
+                                        	<td>#{DonHang.maDH}</td>
+                                                <td> #{DonHang.ngayDH}</td>
+                                                <td >#{DonHang.tongTien}</td>
+                                                <td>#{DonHang.trangThai}</td>
+                                        	<td >#{DonHang.maNV}</td>
+                                                <td >
+                                                    <c:choose>
+                                                    <c:when test="#{DonHang.trangThai== '0'}">
+                                                                
+                                                             <h:commandButton action="#{donHangManagedBean.DonHangChiTiet(DonHang.maDH)}" title="Xem" style="background: url(assets/img/Display20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                             <h:commandButton action="#{donHangManagedBean.DonHangDuyet(DonHang.maDH)}" title="Duyệt Đơn" style="background: url(assets/img/Chot.png); border: none; height: 30px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                        <h:commandButton action="#{printOrderManagedBean.executePDF(DonHang.maDH)}" title="In Đơn Hàng" style="background: url(assets/img/Printer20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                        <h:commandButton action="#{donHangManagedBean.DonHangDelete(DonHang.maDH)}" title="Xóa Đơn" style="background: url(assets/img/Delete20.png); border: none; height: 20px; width: 20px; "></h:commandButton>
+
+                                                    </c:when>
+                                                    <c:when test="#{DonHang.trangThai== '1'}">
+
+                                                        <h:commandButton action="#{donHangManagedBean.DonHangChiTiet(DonHang.maDH)}" title="Xem" style="background: url(assets/img/Display20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:commandButton action="#{donHangManagedBean.DonHangChiTiet(DonHang.maDH)}" title="Xem" style="background: url(assets/img/Display20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+
+                                                        <h:commandButton action="#{printOrderManagedBean.executePDF(DonHang.maDH)}" title="In Đơn Hàng" style="background: url(assets/img/Printer20.png); border: none; height: 20px; width: 20px; "></h:commandButton>&nbsp;&nbsp;
+                                                        <h:commandButton action="#{donHangManagedBean.DonHangDelete(DonHang.maDH)}" title="Xóa Đơn" style="background: url(assets/img/Delete20.png); border: none; height: 20px; width: 20px; "></h:commandButton>
+                                                    </c:otherwise>
+                                                   </c:choose>
                                                 </td>
                                         	
                                         </tr>
+                                        </c:forEach>
+                                        
                                         
                                     </tbody>
                                 </table>

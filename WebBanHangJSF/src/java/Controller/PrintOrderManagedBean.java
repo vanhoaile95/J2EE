@@ -36,7 +36,7 @@ public class PrintOrderManagedBean {
      */
     public PrintOrderManagedBean() {
     }
-    public void executePDF() {
+    public void executePDF(String maDH) {
             try {
             FacesContext faces = FacesContext.getCurrentInstance();
             HttpServletResponse response = 
@@ -71,7 +71,7 @@ public class PrintOrderManagedBean {
 		
 		
 		PdfPCell cell1;
-		cell1 = new PdfPCell(new Phrase("Công ty cổ phần FIT CONSUMER", font10));
+		cell1 = new PdfPCell(new Phrase("hóa đơn", font10));
 		cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell1.setPaddingBottom(5.0f);
 		cell1.setBorder(0);
