@@ -33,21 +33,21 @@
                                 <h3><u> Thông tin khách hàng</u></h3>
                                 <div class="form-group">
                                     <label for="usr">Tên</label>
-                                    <input type="text" class="form-control" id="Ten"></input>
+                                    <input type="text" class="form-control" id="Ten" readonly="readonly" value="#{donHangManagedBean.donHang.tenKH}"></input>
                                     
                                      <label for="sel1">Tỉnh/Thành Phố</label>
-                                        <input type="text" class="form-control" id="Ten"></input>
+                                     <input type="text" class="form-control" id="Tinh" readonly="readonly" value="#{donHangManagedBean.donHang.tinhKH}" ></input>
                                      
                                      <label for="sel1">Quận Huyện</label>
-                                        <input type="text" class="form-control" id="Ten"></input>
+                                     <input type="text" class="form-control" id="Huyen" readonly="readonly" value="#{donHangManagedBean.donHang.huyenKH}" ></input>
                                   </div>
                                 
                                 <label for="usr">Địa Chỉ chi tiết</label>
                                 <br/>
-                                    <textarea name="Text1" class="form-control" cols="40" rows="5"></textarea>
+                                <textarea name="Text1" id="DiaChi" class="form-control" cols="40" rows="5" readonly="readonly" text=""  >#{donHangManagedBean.donHang.diaChiKH}</textarea>
                                     <br/>
                                 <label for="usr">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="Ten"></input>
+                                <input type="text" class="form-control" id="Ten" readonly="readonly"  value="#{donHangManagedBean.donHang.soDTKH}"></input>
                                   <hr></hr>  
                             </div>
                             
@@ -65,36 +65,40 @@
                                     	<th>Tên Sản Phẩm</th>
                                     	<th>Số Lượng</th>
                                     	<th>Giá Bán</th>
-                                    	
+                                    	<th>Thành Tiền</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>sản phẩm 1</td>
-                                                <td >1</td>
-                                        	<td >11000</td>
+                                        <c:forEach var="SanPham" items="#{donHangManagedBean.donHang.listSP}" >
+                                            <tr>
+                                                <td>#{SanPham.STT}</td>
+                                                <td>#{SanPham.tenSP}</td>
+                                                <td >#{SanPham.soluong}</td>
+                                        	<td >#{SanPham.giaSP} VNĐ</td>
+                                                <td >#{SanPham.thanhTien} VNĐ</td>
                                         	
-                                        </tr>
+                                            </tr>
+                                        </c:forEach>
+                                        
                                         <tr>
-                                        	<td colspan="2">Tạm tính</td>
+                                        	<td colspan="3">Tạm tính</td>
                                         	
                                         	<td ></td>
-                                        	<td>11000</td>
+                                                <td>#{donHangManagedBean.donHang.tienTamTinh} VNĐ</td>
                                         	
                                         </tr>
                                         
                                         <tr>
-                                        	<td colspan="2">Phí vận chuyển</td>
+                                        	<td colspan="3">Phí vận chuyển</td>
                                         	
                                         	<td ></td>
-                                        	<td>0</td>
+                                                <td>#{donHangManagedBean.donHang.tienVanChuyen} VNĐ</td>
                                         	
                                         </tr>
                                         <tr>
-                                        	<td colspan="2">Tổng tiền</td>
+                                        	<td colspan="3">Tổng tiền</td>
                                         	
                                         	<td ></td>
-                                        	<td>11000</td>
+                                        	<td>#{donHangManagedBean.donHang.tongTien} VNĐ</td>
                                         	
                                         </tr>
                                     </tbody>
@@ -102,27 +106,27 @@
                              </div>
                             
                             <h3><u> Thông tin giao hàng</u></h3>
-                            <h5>Tổng giá trị sản phẩm: </h5>
-                            <h5>Phí vận chuyển: </h5>
-                            <h5>Tổng chi phí thanh toán: </h5>
-                            <h5>Giao hàng từ: </h5>
+                            <h5>Tổng giá trị sản phẩm: #{donHangManagedBean.donHang.tienTamTinh} VNĐ</h5>
+                            <h5>Phí vận chuyển: #{donHangManagedBean.donHang.tienVanChuyen} VNĐ</h5>
+                            <h5>Tổng chi phí thanh toán: #{donHangManagedBean.donHang.tongTien} VNĐ</h5>
+                            <h5>Giao hàng từ: #{donHangManagedBean.donHang.thoiGianGiaoHang}</h5>
                             
                             <h5>(Thanh toán khi giao hàng) </h5>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{printOrderManagedBean.executePDF()}" value="Duyệt Đơn Hàng" style="background: #ff6666; width: 130px;">
+                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{donHangManagedBean.DonHangList()}" value="Duyệt Đơn Hàng" style="background: #ff6666; width: 130px;">
                                     
                          
                                     </h:commandButton>
                                 </div>
                                 <div class="col-md-4">
-                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{loginManagedBean.login()}" value="Xóa Đơn Hàng" style="background: #ff6666; width: 130px;">
+                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{donHangManagedBean.DonHangDelete(donHangManagedBean.donHang.maDH)}" value="Xóa Đơn Hàng" style="background: #ff6666; width: 130px;">
                                     
                          
                                     </h:commandButton>
                                 </div>
                                 <div class="col-md-4">
-                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{printOrderManagedBean.executePDF()}" value="In Đơn Hàng" style="background: #ff6666; width: 130px;">
+                                    <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{printOrderManagedBean.executePDF(donHangManagedBean.donHang.maDH)}" value="In Đơn Hàng" style="background: #ff6666; width: 130px;">
                                     
                          
                                     </h:commandButton>

@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
     <h:head>
        
-
     </h:head>
     <h:body>
         <ui:composition  template= " Layout.xhtml">
@@ -18,40 +18,466 @@
              
             <ui:define name="content">
                 <br/>
-              
+                
                     
-                <div class="content" style="padding-right: 200px; padding-left: 200px; ">
-                    <h:form>
+                <div class="content" style="padding-right: 200px; padding-left: 200px; background: white;">
+                    <h:form id="form1" onsubmit="return validateForm()">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="content 2" style="background: white;padding-right: 5px; padding-left: 5px; ">
                                 <h3><u> Thông tin khách hàng</u></h3>
                                 <div class="form-group">
                                     <label for="usr">Tên</label>
-                                    <input type="text" class="form-control" id="Ten"></input>
+                                    <h:inputText  class="form-control" id="ten" value="#{donHangManagedBean.donHang.tenKH}"></h:inputText>
                                     
                                      <label for="sel1">Tỉnh/Thành Phố</label>
-                                        <select class="form-control" id="sel1">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
+                                        <select class="form-control" id ="thanhpho">
+                                            <option value="00">--Chọn tỉnh/Thành phố--</option>
                                         </select>
+
+                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> 
+                                     <script type="text/javascript">
+                                           function validateForm()
+                                            {
+                                                var ten= document.getElementById('form1:ten').value;
+                                                if(ten!=null)
+                                                {
+                                                    if(ten.length=="")
+                                                    {
+                                                        alert("Bạn chưa nhập tên, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    alert("Bạn chưa nhập tên, vui lòng kiểm tra lại");
+                                                    return false;
+                                                }
+                                                var tinh= document.getElementById('form1:tinh1').value;
+                                                if(tinh!=null)
+                                                {
+                                                    if(tinh.length=="")
+                                                    {
+                                                        alert("Bạn chưa chọn tỉnh/ thành phố, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                        
+                                                }
+                                                else
+                                                {
+                                                    alert("Bạn chưa chọn tỉnh/ thành phố, vui lòng kiểm tra lại");
+                                                    return false;
+                                                }
+                                                
+                                                var huyen= document.getElementById('form1:huyen1').value;
+                                                if(huyen!=null)
+                                                {
+                                                    if(huyen.length=="")
+                                                    {
+                                                        alert("Bạn chưa chọn huyên, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                        
+                                                }
+                                                else
+                                                {
+                                                    alert("Bạn chưa chọn huyện, vui lòng kiểm tra lại");
+                                                    return false;
+                                                }
+                                                
+                                                
+                                                var diachi= document.getElementById('form1:diachi').value;
+                                                if(diachi!=null)
+                                                {
+                                                    if(diachi.length &lt; 15)
+                                                    {
+                                                        alert("Địa chỉ quá ngắn, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                        
+                                                }
+                                                else
+                                                {
+                                                    alert("Địa chỉ quá ngắn, vui lòng kiểm tra lại");
+                                                    return false;
+                                                }
+                                                
+                                                var sdt= document.getElementById('form1:sdt').value;
+                                                var kiemTraDT = isNaN(sdt);
+                                                if(sdt!=null)
+                                                {
+                                                    if(sdt=="")
+                                                    {
+                                                        alert("Điện thoại không được để trống, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                    
+                                                    if(kiemTraDT==true)
+                                                    {
+                                                        alert("Điện thoại phải ở dạng số, vui lòng kiểm tra lại");
+                                                        return false;
+                                                    }
+                                                        
+                                                }
+                                                else
+                                                {
+                                                    alert("Điện thoại không được để trống, vui lòng kiểm tra lại");
+                                                    return false;
+                                                }
+                                                
+                                                return true;
+                                            }
+                                         function loadtinh()
+                                        {
+                                            // Some code
+                                                var danhsachtinh=new Array();
+                                                danhsachtinh[1]=new Array("01","HÀ NỘI");
+                                                danhsachtinh[0]=new Array("02","THÀNH PHỐ HỒ CHÍ MINH");
+                                                danhsachtinh[2]=new Array("03","HẢI PHÒNG");
+                                                danhsachtinh[3]=new Array("04","ĐÀ NẴNG");
+                                                danhsachtinh[4]=new Array("05","HÀ GIANG");
+                                                danhsachtinh[5]=new Array("06","CAO BẰNG");
+                                                danhsachtinh[6]=new Array("07","LAI CHÂU");
+                                                danhsachtinh[7]=new Array("08","LÀO CAI");
+                                                danhsachtinh[8]=new Array("09","TUYÊN QUANG");
+                                                danhsachtinh[9]=new Array("34","QUẢNG NAM");
+                                                danhsachtinh[10]=new Array("35","QUẢNG NGÃI");
+                                                danhsachtinh[11]=new Array("37","BÌNH ĐỊNH");
+                                                danhsachtinh[12]=new Array("38","GIA LAI");
+                                                danhsachtinh[13]=new Array("39","PHÚ YÊN");
+                                                danhsachtinh[14]=new Array("40","ĐĂK LĂK");
+                                                danhsachtinh[15]=new Array("41","KHÁNH HOÀ");
+                                                danhsachtinh[16]=new Array("52","BÀ RỊA-VŨNG TÀU");
+                                                danhsachtinh[17]=new Array("55","CẦN THƠ");
+                                                danhsachtinh[18]=new Array("56","BẾN TRE");
+                                                var htmloption='';
+                                                for(var i=0; i &lt;18;i++)
+                                                {
+                                                        htmloption+="<option value="+danhsachtinh[i][0]+">"+danhsachtinh[i][1]+"</option> ";
+                                                }
+                                                $('#thanhpho').append(htmloption);
+                                        }
+                                        
+                                         $(document).ready(function () {
+                                              loadtinh();
+                                        });
+                                         
+                                     </script>
                                      
                                      <label for="sel1">Quận Huyện</label>
-                                        <select class="form-control" id="sel1">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
+                                        <select class="form-control" id="hcm">
+                                          
                                         </select>
+                                     <h:inputHidden id="tinh1" value="#{donHangManagedBean.donHang.tinhKH}"></h:inputHidden>
+                                     <h:inputHidden id="huyen1" value="#{donHangManagedBean.donHang.huyenKH}"></h:inputHidden>
+                                     
+                                     <script type="text/javascript">
+                                        function loadhuyen(matinh)
+{
+    // Some code
+	var danhsachhuyen=new Array();
+	danhsachhuyen[1]=new Array("01"," Quận Ba Đình",
+								"Quận Hoàn Kiếm",
+								"Quận Hai Bà Trưng",
+								"Quận Đống Đa",
+								"Quận Tây Hồ",
+								"Quận Cầu Giấy",
+								"Quận Thanh Xuân",
+								"Quận Hoàng Mai",
+								"Quận Long Biên",
+								"Huyện Từ Liêm",
+								"Huyện Thanh Trì",
+								"Huyện Gia Lâm",
+								"Huyện Đông Anh",
+								"Huyện Sóc Sơn",
+								"Thành phố Hà Đông",
+								"Thành phố Sơn Tây",
+								"Huyện Ba Vì",
+								"Huyện Phúc Thọ",
+								"Huyện Thạch Thất",
+								"Huyện Quốc Oai",
+								"Huyện Chương Mỹ",
+								"Huyện Đan Phượng",
+								"Huyện Hoài Đức",
+								"Huyện Thanh Oai",
+								"Huyện Mỹ Đức",
+								"Huyện Ứng Hòa",
+								"Huyện Thường Tín",
+								"Huyện Phú Xuyên",
+								"Huyện Mê Linh");
+	danhsachhuyen[0]=new Array("02","Quận 1",
+									"Quận 2",
+									"Quận 3",
+									"Quận 4",
+									"Quận 5",
+									"Quận 6",
+									"Quận 7",
+									"Quận 8",
+									"Quận 9",
+									"Quận 10",
+									"Quận 11",
+									"Quận 12",
+									"Quận Bình Tân",
+									"Quận Bình Thạnh",
+									"Quận Gò Vấp",
+									"Quận Phú Nhuận",
+									"Quận Tân Bình",
+									"Quận Tân Phú",
+									"Quận Thủ Đức",
+									"Huyện Bình Chánh",
+									"Huyện Cần Giờ",
+									"Huyện Củ Chi",
+									"Huyện Hóc Môn",
+									"Huyện Nhà Bè");
+	danhsachhuyen[2]=new Array("03","Quận Dương Kinh",
+									"Quận Đồ Sơn",
+									"Quận Hải An",
+									"Quận Kiến An",
+									"Quận Hồng Bàng",
+									"Quận Ngô Quyền",
+									"Quận Lê Chân",
+									"Huyện An Dương",
+									"Huyện An Lão",
+									"Huyện Bạch Long Vĩ",
+									"Huyện Cát Hải",
+									"Huyện Kiến Thụy",
+									"Huyện Tiên Lãng",
+									"Huyện Vĩnh Bảo",
+									"Huyện Thủy Nguyên");
+	danhsachhuyen[3]=new Array("04","Thành Phố Đà Nẵng",
+									"Quận Hải Châu",
+									"Quận Thanh Khê",
+									"Quận Sơn Trà",
+									"Quận Ngũ Hành Sơn",
+									"Quận Liên Chiểu",
+									"Quận Cẩm Lệ",
+									"Huyện Hòa Vang",
+									"Huyện Hoàng Sa");
+	danhsachhuyen[4]=new Array("05","Thành Phố Hà Giang",
+									"Huyện Đồng Văn",
+									"Huyện Mèo Vạc",
+									"Huyện Yên Minh",
+									"Huyện Quản Bạ",
+									"Huyện Bắc Mê",
+									"Huyện Vị Xuyên",
+									"Huyện Bắc Quang",
+									"Huyện Hoàng Su Phì",
+									"Huyện Xín Mần",
+									"Huyện Quang Bình");
+	danhsachhuyen[5]=new Array("06","Thị Xã Cao Bằng",
+									"Huyện Bảo Lâm",
+									"Huyện Bảo Lạc",
+									"Huyện Nguyên Bình",
+									"Huyện Thông Nông",
+									"Huyện Hà Quảng",
+									"Huyện Hòa An",
+									"Huyện Trà Lĩnh",
+									"Huyện Trùng Khánh",
+									"Huyện Hạ Lang",
+									"Huyện Phục Hòa",
+									"Huyện Quảng Uyên",
+									"Huyện Thạch An");
+	danhsachhuyen[6]=new Array("07","Thị Xã Lai Châu",
+									"Huyện Tam Đường",
+									"Huyện Than Uyên",
+									"Huyện Phong Thổ",
+									"Huyện Sìn Hồ",
+									"Huyện Mường Tè",
+									"Huyện Tân Uyên");
+	danhsachhuyen[7]=new Array("08","Thành Phố Lào Cai",
+									"Huyện Bảo Thắng",
+									"Huyện Bắc Hà",
+									"Huyện Bảo Yên",
+									"Huyện Bát Xát",
+									"Huyện Mường Khương",
+									"Huyện Sa Pa",
+									"Huyện Si Ma Cai",
+									"Huyện Văn Bàn");
+	danhsachhuyen[8]=new Array("09","Thành Phố Tuyên Quang",
+									"Huyện Na Hang",
+									"Huyện Chiêm Hoá",
+									"Huyện Hàm Yên",
+									"Huyện Yên Sơn",
+									"Huyện Sơn Dương",
+									"Huyện Lâm Bình");
+	danhsachhuyen[9]=new Array("34","Thành Phố Tam Kỳ",
+									"Thành Phố Hội An",
+									"Huyện Thăng Bình",
+									"Huyện Duy Xuyên",
+									"Huyện Điện Bàn",
+									"Huyện Đại Lộc",
+									"Huyện Quế Sơn",
+									"Huyện Hiệp Đức",
+									"Huyện Phước Sơn",
+									"Huyện Tiên Phước",
+									"Huyện Bắc Trà My",
+									"Huyện Nam Trà My",
+									"Huyện Nam Giang",
+									"Huyện Đông Giang",
+									"Huyện Tây Giang",
+									"Huyện Phú Ninh",
+									"Huyện Nông Sơn");
+	danhsachhuyen[10]=new Array("35","Thành Phố Quảng Ngãi",
+									"Huyện Ba Tơ",
+									"Huyện Bình Sơn",
+									"Huyện Đức Phổ",
+									"Huyện Minh Long",
+									"Huyện Mộ Đức",
+									"Huyện Nghĩa Hành",
+									"Huyện Sơn Hà",
+									"Huyện Sơn Tây",
+									"Huyện Sơn Tịnh",
+									"Huyện Tây Trà",
+									"Huyện Trà Bồng",
+									"Huyện Tư Nghĩa",
+									"Huyện Lý Sơn");
+	danhsachhuyen[11]=new Array("37","Thành Phố Quy Nhơn",
+									"Thị Xã An Nhơn",
+									"Huyện An Lão",
+									"Huyện Hoài Ân",
+									"Huyện Hoài Nhơn",
+									"Huyện Phù Cát",
+									"Huyện Phù Mỹ",
+									"Huyện Tuy Phước",
+									"Huyện Tây Sơn",
+									"Huyện Vân Canh",
+									"Huyện Vĩnh Thạnh");
+	danhsachhuyen[12]=new Array("38","Thành Phố Pleiku",
+									"Thị Xã An Khê",
+									"Thị Xã Ayun Pa",
+									"Huyện Chư Sê",
+									"Huyện Phú Thiện",
+									"Huyện Ia Pav",
+									"Huyện Krông Pa",
+									"Huyện Kông Chro",
+									"Huyện Kbang",
+									"Huyện Mang Yang",
+									"Huyện Đak Pơ",
+									"Huyện Đắk Đoa",
+									"Huyện Chư Păh",
+									"Huyện Ia Grai",
+									"Huyện Chư Prông",
+									"Huyện Đức Cơ",
+									"Huyện Chư Pưh");
+	danhsachhuyen[13]=new Array("39","Thành Phố Tuy Hòa",
+									"Thị Xã Sông Cầu",
+									"Huyện Đông Hòa",
+									"Huyện Tây Hòa",
+									"Huyện Tuy An",
+									"Huyện Sông Cầu",
+									"Huyện Đồng Xuân",
+									"Huyện Sơn Hoà",
+									"Huyện Sông Hinh",
+									"Huyện Phú Hoà");
+	danhsachhuyen[14]=new Array("40","Thành Phố Buôn Ma Thuột",
+									"Huyện M ðrak",
+									"Huyện Lak",
+									"Huyện Buôn Ðôn",
+									"Huyện Ea Súp",
+									"Huyện Ea H leo",
+									"Huyện Ea Ea Kar",
+									"Huyện Krông Pắc",
+									"Huyện Krông Buk",
+									"Huyện Krông Năng",
+									"Huyện Krông Bông",
+									"Huyện Krông Ana",
+									"Huyện Krông Nô",
+									"Huyện Dăk Nông",
+									"Huyện Dak Rlấp",
+									"Huyện Dak Mil",
+									"Huyện Cư Jút",
+									"Huyện Cư M gar");
+	danhsachhuyen[15]=new Array("41","Thành Phố Nha Trang",
+									"Thành Phố Cam Ranh",
+									"Huyện Khánh Sơn",
+									"Huyện Khánh Vĩnh",
+									"Huyện Cam Lâm",
+									"Huyện Diên Khánh",
+									"Huyện Ninh Hòa",
+									"Huyện Trường Sa",
+									"Huyện Vạn Ninh");
+	danhsachhuyen[16]=new Array("52","Thành Phố Vũng Tàu",
+									"Thành Phố Bà Rịa",
+									"Huyện Long Điền",
+									"Huyện Đất Đỏ",
+									"Huyện Châu Đức",
+									"Huyện Tân Thành",
+									"Huyện Côn Đảo",
+									"Huyện Xuyên Mộc");
+	danhsachhuyen[17]=new Array("55","Quận Ninh Kiều",
+									"Quận Cái Răng",
+									"Quận Bình Thủy",
+									"Quận Ô Môn",
+									"Quận Thốt Nốt",
+									"Huyện Cờ Đỏ",
+									"Huyện Phong Điền",
+									"Huyện Vĩnh Thạnh",
+									"Huyện Thới Lai");
+	danhsachhuyen[18]=new Array("56","Thành Phố Bến Tre",
+									"Huyện Châu Thành",
+									"Huyện Bình Đại",
+									"Huyện Chợ Lách",
+									"Huyện Thạnh Phú",
+									"Huyện Giồng Trôm",
+									"Huyện Ba Tri",
+									"Huyện Mỏ Cày");
+	var htmloption='';
+	for(var i=0;  i &lt;18;i++)
+	{
+		if(danhsachhuyen[i][0]===matinh)
+		{
+			for(var j=1;j &lt;danhsachhuyen[i].length;j++)
+			{
+				htmloption+="<option value="+j.toString()+">"+danhsachhuyen[i][j]+"</option> ";
+			}
+		}
+		
+		
+	}
+	$('#hcm').append(htmloption);
+}
+                                        
+                                         $(document).ready(function () {
+                                               $('#thanhpho').change(function(){ 
+                                                   
+                                                var $val=$('#thanhpho').val();
+                                                
+                                                if($val!=''){ 
+                                                    //window.alert($("#thanhpho option[value="+$val+"]").text());
+                                                    var tinh=$("#thanhpho option[value="+$val+"]").text();
+                                                    
+                                                   document.getElementById('form1:tinh1').value = tinh;
+                                                                $('#hcm').empty();
+                                                    loadhuyen($val);
+                                                                $('#hcm').show();
+                                                } 
+                                            }) ;
+                                            
+                                            $('#hcm').change(function(){ 
+                                                   
+                                                var $val=$('#hcm').val();
+                                                var huyen=$("#hcm option[value="+$val+"]").text();
+                                               if($val!=''){ 
+                                                        var $val1=$('#tientamtinhhide').val();
+                                                        
+                                                     document.getElementById('form1:huyen1').value = huyen; 
+                                                     document.getElementById('form1:phivanchuyen').value = '10000';
+                                                     document.getElementById('form1:tongtien').value = parseInt($val1)+10000;
+                                                    $('#vanchuylable').text('Phí vận chuyển: 10000 VNĐ');
+                                                    $('#tongthanhtoanlable').text('Tổng chi phí thanh toán:'+document.getElementById('form1:tongtien').value+' VNĐ')  ;
+                                                } 
+                                            }) 
+                                        });
+                                         
+                                     </script>
                                   </div>
                                 
                                 <label for="usr">Vui lòng điền CHÍNH XÁC "tầng, số nhà, đường" để tránh trường hợp đơn hàng bị hủy ngoài ý muốn.</label>
-                                    <textarea name="Text1" class="form-control" cols="40" rows="5"></textarea>
+                                <h:inputTextarea id="diachi" class="form-control" cols="40" rows="5" value="#{donHangManagedBean.donHang.diaChiKH}"></h:inputTextarea>
                                 <label for="usr">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="Ten"></input>
+                                <h:inputText  class="form-control" id="sdt" value="#{donHangManagedBean.donHang.soDTKH}"></h:inputText>
                                   <hr></hr>  
+                                  <br/>
                             </div>
                             
                         </div>
@@ -68,51 +494,59 @@
                                     	<th>Tên Sản Phẩm</th>
                                     	<th>Số Lượng</th>
                                     	<th>Giá Bán</th>
+                                        <th>Thành Tiền</th>
                                     	
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>sản phẩm 1</td>
-                                                <td >1</td>
-                                        	<td >11000</td>
+                                        <c:forEach var="SanPham" items="#{donHangManagedBean.donHang.listSP}" >
+                                            <tr>
+                                                <td>#{SanPham.STT}</td>
+                                                <td>#{SanPham.tenSP}</td>
+                                                <td >#{SanPham.soluong}</td>
+                                        	<td >#{SanPham.giaSP} VNĐ</td>
+                                                <td >#{SanPham.thanhTien} VNĐ</td>
                                         	
-                                        </tr>
+                                            </tr>
+                                        </c:forEach>
                                         <tr>
                                         	<td colspan="2">Tạm tính</td>
                                         	
-                                        	<td ></td>
-                                        	<td>11000</td>
+                                        	<td colspan="2">
+                                                    <h:inputText id="tientamtinh"  value="#{donHangManagedBean.donHang.tienTamTinh}" style="border: 0px; text-align: right; " readonly="true" ></h:inputText> 
+                                                    <input type="hidden" id="tientamtinhhide" value="#{donHangManagedBean.donHang.tienTamTinh}"></input>
+                                                </td>
+                                        	
+                                                <td>VNĐ</td>
                                         	
                                         </tr>
                                         
                                         <tr>
                                         	<td colspan="2">Phí vận chuyển</td>
                                         	
-                                        	<td ></td>
-                                        	<td>0</td>
                                         	
+                                                <td colspan="2"><h:inputText id="phivanchuyen" value="#{donHangManagedBean.donHang.tienVanChuyen}" style="border: 0px; text-align: right; " readonly="true" ></h:inputText> </td>
+                                        	<td>VNĐ</td>
                                         </tr>
                                         <tr>
                                         	<td colspan="2">Tổng tiền</td>
                                         	
-                                        	<td ></td>
-                                        	<td>11000</td>
                                         	
+                                                <td colspan="2" ><h:inputText id="tongtien" value="#{donHangManagedBean.donHang.tongTien}" style="border: 0px; text-align: right; " readonly="true"></h:inputText> </td>
+                                        	<td>VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
                              </div>
                             
                             <h3><u> Thông tin giao hàng</u></h3>
-                            <h5>Tổng giá trị sản phẩm: </h5>
-                            <h5>Phí vận chuyển: </h5>
-                            <h5>Tổng chi phí thanh toán: </h5>
-                            <h5>Giao hàng từ: </h5>
+                            <h5 >Tổng giá trị sản phẩm: #{donHangManagedBean.donHang.tienTamTinh} VNĐ</h5>
+                            <h5 id="vanchuylable">Phí vận chuyển: #{donHangManagedBean.donHang.tienVanChuyen} VNĐ</h5>
+                            <h5 id="tongthanhtoanlable">Tổng chi phí thanh toán: #{donHangManagedBean.donHang.tongTien} VNĐ</h5>
+                            <h5>Giao hàng từ: #{donHangManagedBean.donHang.thoiGianGiaoHang}</h5>
                             
                             <h5>(Thanh toán khi giao hàng) </h5>
                             <div align="center">
-                                <h:commandButton class ="btn btn-round btn-fill btn-info" action="#{loginManagedBean.login()}" value="Đặt hàng" style="background: #ff6666; width: 200px;">
+                                <h:commandButton id="btsubmit" class ="btn btn-round btn-fill btn-info" action="#{donHangManagedBean.DonHangSave()}" value="Đặt hàng" style="background: #ff6666; width: 200px;" >
                                     
                          
                         </h:commandButton>

@@ -9,6 +9,10 @@ import Model.DonHang;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,6 +23,7 @@ import java.io.Serializable;
 public class DonHangManagedBean implements Serializable {
 
     private DonHang donHang;
+    
 
     public DonHang getDonHang() {
         return donHang;
@@ -32,6 +37,8 @@ public class DonHangManagedBean implements Serializable {
      * Creates a new instance of DonHangManagedBean
      */
     public DonHangManagedBean() {
+         HttpSession sesion=Util.getSession();
+         sesion.setAttribute("abc", "fdgnfjdngj");
         donHang=new DonHang();
         this.donHang.init("");
     }
@@ -44,6 +51,10 @@ public class DonHangManagedBean implements Serializable {
     public String DonHangChiTiet(String maDH)
     {
          //this.donHang.init(maDH);
+        System.out.println("mã đơn hàng detail:    "+maDH);
+        this.donHang.init(maDH);
+        
+        
         return "OrderDetail";
     }
     
@@ -53,10 +64,30 @@ public class DonHangManagedBean implements Serializable {
         return "Order";
     }
     
+    
+    
     public String DonHangSave()
     {
-        //nhập danh sách sảnh phẩm vào đơn hàng (listSP)
-        return "Home";
+        //nhập danh sách sản phẩm vào đơn hàng (listSP)
+        HttpSession sesion=Util.getSession();
+            HttpServletRequest request = 
+            Util.getRequest();
+//            String value = FacesContext.getCurrentInstance().
+//		getExternalContext().getRequestParameterMap().get("ten");
+//	    donHang.setTinhKH(value);
+        
+        System.err.println("ten: "+donHang.getTenKH());
+        System.err.println("so dt: "+donHang.getSoDTKH());
+        System.err.println("dia chi: "+donHang.getDiaChiKH());
+        System.err.println("Tinh:  "+donHang.getTinhKH());
+        System.err.println("huyen: "+donHang.getHuyenKH());
+        return "Order";
+    }
+    
+    public String action()
+    {
+        
+        return "Order";
     }
     
     public String DonHangDelete(String maDH)

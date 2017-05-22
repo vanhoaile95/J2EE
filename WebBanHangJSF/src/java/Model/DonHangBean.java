@@ -13,6 +13,7 @@ public class DonHangBean {
     String trangthai1="0";
     String trangthai2="1";
     String trangthai3="2";
+    String tienTamTinh;
     String STT;
     String maDH;
     String maNV;
@@ -21,10 +22,19 @@ public class DonHangBean {
     String tongTien;
     String trangThai;
 
+    public void setTienTamTinh(String tienTamTinh) {
+        this.tienTamTinh = tienTamTinh;
+    }
+
+    public String getTienTamTinh() {
+        return tienTamTinh;
+    }
+
+    
     public void setTrangthai1(String trangthai1) {
         this.trangthai1 = trangthai1;
     }
-
+    
     public void setTrangthai2(String trangthai2) {
         this.trangthai2 = trangthai2;
     }
@@ -117,6 +127,7 @@ public class DonHangBean {
         this.tienVanChuyen = "";
         this.tongTien = "";
         this.trangThai = "0";
+        this.tienTamTinh="";
     }
             
 }

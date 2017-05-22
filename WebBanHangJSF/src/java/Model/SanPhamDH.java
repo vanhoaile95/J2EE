@@ -13,7 +13,7 @@ public class SanPhamDH {
     
     String STT;
     String tenSP;
-    int Soluong;
+    String soluong;
     String giaSP;
     String imgSP;
     String ghiChu;
@@ -35,13 +35,7 @@ public class SanPhamDH {
     public String getThanhTien() {
         return thanhTien;
     }
-    public void setSoluong(int Soluong) {
-        this.Soluong = Soluong;
-    }
-
-    public int getSoluong() {
-        return Soluong;
-    }
+    
 
     public SanPhamDH() {
         this.tenSP = "";
@@ -49,7 +43,7 @@ public class SanPhamDH {
         this.imgSP = "";
         this.ghiChu = "";
         this.maSP = "";
-        this.Soluong=0;
+        this.soluong="0";
         this.thanhTien="";
     }
 
@@ -93,13 +87,21 @@ public class SanPhamDH {
         return maSP;
     }
 
-    public SanPhamDH(String tenSP, String giaSP, String imgSP, String ghiChu, String maSP, int soLuong , String thanhTien) {
+    public String getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(String soluong) {
+        this.soluong = soluong;
+    }
+
+    public SanPhamDH(String tenSP, String giaSP, String imgSP, String ghiChu, String maSP, String soLuong , String thanhTien) {
         this.tenSP = tenSP;
         this.giaSP = giaSP;
         this.imgSP = imgSP;
         this.ghiChu = ghiChu;
         this.maSP = maSP;
-        this.Soluong=soLuong;
+        this.soluong=soLuong;
         this.thanhTien=thanhTien;        
     }
     

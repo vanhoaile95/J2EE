@@ -8,10 +8,14 @@ package Model;
 import Database.dbutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -22,6 +26,7 @@ public class DonHang {
     String maDH;
     String maNV;
     String ngayDH;
+    String tienTamTinh;
     String tienVanChuyen;
     String tongTien;
     String trangThai;
@@ -30,6 +35,7 @@ public class DonHang {
     String huyenKH;
     String diaChiKH;
     String SoDTKH;
+    String thoiGianGiaoHang;
     List<SanPhamDH> listSP;
     List<DonHangBean> listDH;
     
@@ -54,17 +60,49 @@ public class DonHang {
         this.maDH = "";
         this.maNV = "";
         this.ngayDH = "";
-        this.tienVanChuyen = "";
-        this.tongTien = "";
+        this.tienTamTinh="0";
+        this.tienVanChuyen = "0";
+        this.tongTien = "0";
         this.tenKH = "";
         this.tinhKH = "";
         this.huyenKH = "";
         this.diaChiKH = "";
         this.SoDTKH = "";
+        Calendar now5 = Calendar.getInstance();
+                Calendar now0 = Calendar.getInstance();
+               
+                    now5.set(now0.get(Calendar.YEAR), now0.get(Calendar.MONTH), now0.get(Calendar.DATE));
+                    
+                    now5.add(Calendar.DATE, 5);
+                    
+                    this.thoiGianGiaoHang="(Giao hàng kể từ ngày "+ now0.get(Calendar.DATE) +"/"+ (now0.get(Calendar.MONTH) + 1) +"/"+ now0.get(Calendar.YEAR)+ 
+                        " Đến ngày " +now5.get(Calendar.DATE)+"/"+(now5.get(Calendar.MONTH) + 1)+"/"+now5.get(Calendar.YEAR)+")";
+                
         this.listSP = new ArrayList<SanPhamDH>();
         this.listDH = new ArrayList<DonHangBean>();
     }
 
+    public String getThoiGianGiaoHang() {
+        return thoiGianGiaoHang;
+    }
+
+    public void setThoiGianGiaoHang(String thoiGianGiaoHang) {
+        this.thoiGianGiaoHang = thoiGianGiaoHang;
+    }
+
+    
+    
+    
+    public String getTienTamTinh() {
+        return tienTamTinh;
+    }
+
+    public void setTienTamTinh(String tienTamTinh) {
+        this.tienTamTinh = tienTamTinh;
+    }
+
+    
+    
     public void setMaDH(String maDH) {
         this.maDH = maDH;
     }
@@ -173,11 +211,12 @@ public class DonHang {
     
     public void init(String MaDH) 
     {
+        List<DonHangBean> donhanlist=new ArrayList<DonHangBean>();
         dbutils db=new dbutils();
         ResultSet dataRs;
         if(MaDH.equals(""))
         {
-            String query="select dh.MaDonHang,us.HoTen,dh.NgayDonHang,dh.TienVanChuyen,dh.TongTien,dh.TrangThai from DonHang dh\n" +
+            String query="select dh.MaDonHang,us.HoTen,dh.NgayDonHang,dh.TienTamTinh,dh.TienVanChuyen,dh.TongTien,dh.TrangThai from DonHang dh\n" +
                             " inner join UserDetail us on us.ID=dh.IDUser";
             System.out.println("init query:   "+query);
             dataRs=db.get(query);
@@ -190,11 +229,13 @@ public class DonHang {
                     DonHang.setMaDH(dataRs.getString("MaDonHang"));
                     DonHang.setMaNV(dataRs.getString("HoTen"));
                     DonHang.setNgayDH(dataRs.getString("NgayDonHang"));
+                    DonHang.setTienTamTinh(dataRs.getString("TienTamTinh"));
                     DonHang.setTienVanChuyen(dataRs.getString("TienVanChuyen"));
                     DonHang.setTongTien(dataRs.getString("TongTien"));
                     DonHang.setTrangThai(dataRs.getString("TrangThai"));
-                    this.listDH.add(DonHang);
+                    donhanlist.add(DonHang);
                 }
+                this.listDH=donhanlist;
                 dataRs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DonHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,6 +256,7 @@ public class DonHang {
                     this.maDH=dataRs.getString("MaDonHang");
                     this.maNV=dataRs.getString("HoTen");
                     this.ngayDH=dataRs.getString("NgayDonHang");
+                    this.tienTamTinh=dataRs.getString("TienTamTinh");
                     this.tienVanChuyen=dataRs.getString("TienVanChuyen");
                     this.tongTien=dataRs.getString("TongTien");
                     this.trangThai=dataRs.getString("TrangThai");
@@ -224,11 +266,37 @@ public class DonHang {
                     this.diaChiKH=dataRs.getString("DiaChiKH");
                     this.SoDTKH=dataRs.getString("SoDTKH");
                 }
+                
+                //thời gian giao hàng
+                String thoiGian=this.ngayDH.substring(0,10);
+                 System.err.println(thoiGian);
+                Date date1=null;
+                if(this.ngayDH.length()>0)
+                {
+                    try {
+                        date1=new SimpleDateFormat("yyyy-MM-dd").parse(thoiGian);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(DonHang.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Calendar now6 = Calendar.getInstance();
+                Calendar now1 = Calendar.getInstance();
+                if(date1!=null)
+                {
+                    now6.set(date1.getYear()+1900, date1.getMonth(), date1.getDate());
+                    now1.set(date1.getYear()+1900, date1.getMonth(), date1.getDate());
+                    now6.add(Calendar.DATE, 6);
+                    now1.add(Calendar.DATE, 1);
+                    this.thoiGianGiaoHang="(Giao hàng kể từ ngày "+ now1.get(Calendar.DATE) +"/"+ (now1.get(Calendar.MONTH) + 1) +"/"+ now1.get(Calendar.YEAR)+ 
+                        " Đến ngày " +now6.get(Calendar.DATE)+"/"+(now6.get(Calendar.MONTH) + 1)+"/"+now6.get(Calendar.YEAR)+")";
+                }
+                
                 dataRs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DonHang.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+             List<SanPhamDH> sanphamlist=new ArrayList<SanPhamDH>();
             String query1 ="select dhdt.*,sp.TenSP from DonHang dh\n" +
                             "inner join DonHangDetail dhdt on dhdt.MaDonHang=dh.MaDonHang\n" +
                             "inner join SanPham sp on sp.MaSP=dhdt.MaSP\n" +
@@ -244,12 +312,13 @@ public class DonHang {
                     sp.setSTT(String.valueOf(i++));
                     sp.setMaSP(dataRs.getString("MaSP"));
                     sp.setTenSP(dataRs.getString("TenSP"));
-                    sp.setSoluong( Integer.parseInt(dataRs.getString("SoLuongMua")) );
+                    sp.setSoluong(dataRs.getString("SoLuongMua"));
                     sp.setGiaSP(dataRs.getString("DonGia"));
                     sp.setThanhTien(dataRs.getString("ThanhTien"));
                     
-                    this.listSP.add(sp);
+                    sanphamlist.add(sp);
                 }
+                this.listSP=sanphamlist;
                 dataRs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DonHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -258,7 +327,10 @@ public class DonHang {
         }
         db.shutDown();
     }
-    
+    public void initDonHangDetail(String maDH)
+    {
+        
+    }
     public Boolean insert()
     {
         dbutils db=new dbutils();
