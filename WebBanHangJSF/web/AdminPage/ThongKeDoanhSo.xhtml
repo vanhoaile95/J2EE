@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="assets/css/tableStyle.css" rel="stylesheet" />
+    </h:head>
+    <h:body>   
+        <ui:composition  template="AdminLayout.xhtml">
+
+            <ui:define name="TacVu">
+                <li><a href="QLKhachHang.xhtml">Thống kê doanh thu</a></li>
+                <li><a href="">Thống kê doanh số</a></li>               
+            </ui:define>
+            <ui:define name="script">   
+            </ui:define>
+            <ui:define name ="Header">
+                <h4 class="title">Thống kê doanh số</h4>
+            </ui:define>
+            <ui:define name="content">   
+                
+                <h:outputLabel styleClass="Head"> <h2>Thống kê doanh số tháng #{thongkeBean.modelThang.thoigian}</h2></h:outputLabel>
+                <h:dataTable value="#{thongkeBean.getThongKe()}" var="u" border="1"
+                             styleClass="order-table"
+                             headerClass="order-table-header"
+                             rowClasses="order-table-odd-row,order-table-even-row">
+                    <h:column>
+                        <f:facet name="header">
+                            Mã sản phẩm
+                        </f:facet>
+                        #{u.maSP}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Tên sản phẩm
+                        </f:facet>
+                        #{u.tenSP}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Số lượng bán ra
+                        </f:facet>
+                        #{u.SL}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Tổng tiền
+                        </f:facet>
+                        #{u.SL}
+                    </h:column>
+                </h:dataTable>
+                <h:form>
+                    <h:commandButton value="In báo cáo" styleClass="printButton" action="#{printBean.inBaoCao()}"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

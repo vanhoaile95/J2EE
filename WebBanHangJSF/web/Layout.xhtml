@@ -5,498 +5,501 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-       
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
 
-    <title><ui:insert name="title"/></title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
 
-    
-    <link rel='shortcut icon' type='image/x-icon' href='./resources/Image/icon.png' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
-   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'/>
-   
+        <title><ui:insert name="title"/></title>
 
-   
-  
-    <ui:insert name ="LoginCSS"/>
- 
-    <h:outputStylesheet library="CSS" name ="style.css" ></h:outputStylesheet>
-    
-     <h:outputScript library="Scripts" name = "jquery-1.9.1.min.js"></h:outputScript>
-    <h:outputScript library="Scripts" name = "bootstrap.min.js"></h:outputScript>
-   
-  
-    
+
+        <link rel='shortcut icon' type='image/x-icon' href='./resources/Image/icon.png' />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'/>
+
+
+
+
+        <ui:insert name ="LoginCSS"/>
+
+        <h:outputStylesheet library="CSS" name ="style.css" ></h:outputStylesheet>
+
+        <h:outputScript library="Scripts" name = "jquery-1.9.1.min.js"></h:outputScript>
+        <h:outputScript library="Scripts" name = "bootstrap.min.js"></h:outputScript>
+
+        <script  type="text/javascript">
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
     </h:head>
-   
-    <h:body>
-         
 
-    <!--Header-->
-    <!--Menu-->
-    <style>
-        .navbar-inverse .navbar-nav > li > a {
-            color: #fff;
-        }
+    <h:body>
+
+
+        <!--Header-->
+        <!--Menu-->
+        <style>
+            .navbar-inverse .navbar-nav > li > a {
+                color: #fff;
+            }
 
             .navbar-inverse .navbar-nav > li > a:hover {
                 color: silver;
             }
 
-        .navbar-inverse .navbar-header > a {
-            color: #fff;
-        }
+            .navbar-inverse .navbar-header > a {
+                color: #fff;
+            }
 
             .navbar-inverse .navbar-header > a:hover {
                 color: silver;
             }
 
-        .navbar-nav > li {
-            border-right: 1px double #4caf50;
-        }
+            .navbar-nav > li {
+                border-right: 1px double #4caf50;
+            }
 
-        .navbar-nav {
-            border-left: 1px double #4caf50;
-        }
-    </style>
-
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="header" style="font-weight: bold;">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <h:form>
-            <h:commandLink class="navbar-brand" action ="Home.xhtml?faces-redirect=true" style="margin-top:0.1cm"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</h:commandLink>
-            </h:form>
-            
-            
-        </div>
+            .navbar-nav {
+                border-left: 1px double #4caf50;
+            }
+        </style>
 
 
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="header" style="font-weight: bold;">
 
-                <!--Quần-->
-                <li class="dropdown">
-
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Quan.png" width="32" height="32" /> Quần <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Quần tây</a></li>
-                                <li><a href="#">Quần jean</a></li>
-                                <li><a href="#">Quần kaki</a></li>
-                                <li><a href="#">Quần lửng</a></li>
-                                <li><a href="#">Khác..</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Quần short</a></li>
-                                <li><a href="#">Váy Đầm</a></li>
-                                <li><a href="#">Quần lót</a></li>
-                                <li><a href="#">Khác..</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--Áo-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Ao.png" width="32" height="32" />Áo <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-
-
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Áo sơ mi</a></li>
-                                <li><a href="#">Áo thun</a></li>
-                                <li><a href="#">Áo khoác</a></li>
-                                <li><a href="#">Áo vest</a></li>
-                                <li><a href="#">Khác..</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Áo Sơ mi</a></li>
-                                <li><a href="#">Áo thun</a></li>
-                                <li><a href="#">Áo len</a></li>
-                                <li><a href="#">Áo khoác</a></li>
-                                <li><a href="#">Khác..</a></li>
-
-
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!--Theo bộ-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Bo.png" width="32" height="32" />Theo bộ <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-male" aria-hidden="true"></i> Phái nam</a></li>
-                        <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ</a></li>
-
-                    </ul>
-                </li>
-                <!--Phụ kiện-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Phukien.png" width="32" height="32" />Phụ kiện <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
-                            <ul class="dropdown-menu">
-
-                                <li><a href="#">Vớ nam</a></li>
-                                <li><a href="#">Dây nịt</a></li>
-                                <li><a href="#">Khác..</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Vớ</a></li>
-                                <li><a href="#">Vòng đeo tay</a></li>
-                                <li><a href="#">Thắt lưng</a></li>
-                                <li><a href="#">Khác..</a></li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                
-                <!--Giới thiệu-->
-                <li class="dropdown">
-                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Gioithieu.png" width="32" height="32" />Giới thiệu </a>
-                </li>
-                <!--Liên hệ-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Lienhe.png" width="32" height="32" />Liên hệ </a>
-                </li>
-
-            </ul>
-
-
-
-
-            <!--Search button-->
-            <button id="searchbtn" type="button" class="btn btn-success" style = "float:right;margin-top:0.3cm;margin-right:0.2cm; background-color:transparent">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-
-            <script type="text/javascript">
-
-                var hide = true;
-                $('#searchbtn').click(function () {
-                   
-                    if (hide === false) {
-
-                        $('#search').animate({
-                            opacity: '0',
-                            width: '0'
-                        });
-                        hide = true;
-                       
-                    }
-                    else {
-                   
-                        $('#search').animate({
-                            opacity: '1',
-                            width: '500px'
-                        });
-                        $('#textsearch').focus();
-                       
-                        hide = false;
-                    }
-                });
-            </script>
-            <!--Search button-->
-
-            <div class="col-xs-3" style="float:right;width:0px;opacity:0;margin-top:0.2cm;position:absolute" id="search" >
-                <input id="textsearch" class="form-control" type="text" style=" background:rgba(0, 0, 0, 10) ;color:white" placeholder="Search...."/>
-            </div>
-
-            <img src="./resources/Image/SDT.png" style="float:right;margin-top:0.25cm;margin-right:0.2cm"  width="150" />
-            <a style="float: right; margin-top: 0.4cm; margin-right: 0.2cm; background-color: transparent; color: #fff"><img src="./resources/Image/cart.png" width="32" height="32" /> Giỏ hàng : Trống</a>
-
-
-        </div><!-- /.navbar-collapse -->
-
-
-
-
-    </nav>
-    <br /><br /><br />
-    <!--Brand icon-->
-    <ul class="topnav" style="background-image:url('./resources/Image/heade.png');height:130px;" id="topbackground" >
-        <c:choose>
-            <c:when test="#{loginManagedBean.modelLogin.session == null}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <h:form>
-              
-                 <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(false)}"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</h:commandLink></li>
-                 <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(true)}"><i class="fa fa-user-plus" aria-hidden="true"></i> Đăng ký</h:commandLink></li>
-                 </h:form>
-                 
-            </c:when>
-            <c:otherwise>
-              
-                <li style="float:right"><a style="cursor:pointer" onclick="openNav1()" ><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.modelLogin.session.toUpperCase()} <b class="fa fa-caret-right"></b></a></li>
-                 
-            <!--Sidebar-->
-                <style>
-
-                 .sidenav {
-                     height: 100%; /* 100% Full-height */
-                     width: 0; /* 0 width - change this with JavaScript */
-                     position: fixed; /* Stay in place */
-                     z-index: 1; /* Stay on top */
-                     top: 0;
-                     right: 0;
-                     background-color: #111; /* Black*/
-                     overflow-x: hidden; /* Disable horizontal scroll */
-                     padding-top: 60px; /* Place content 60px from the top */
-                     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-                 }
-
-                     .sidenav a {
-                         padding: 8px 8px 8px 32px;
-                         text-decoration: none;
-                         font-size: 25px;
-                         color: #818181;
-                         display: block;
-                         transition: 0.3s;
-
-                     }
-
-                         .sidenav a:hover, .offcanvas a:focus {
-                             color: #f1f1f1;
-                         }
-
-                     .sidenav .closebtn {
-                         position: absolute;
-                         top: 1.4cm;
-                         right: 25px;
-                         font-size: 36px;
-                         margin-left: 50px;
-                     }
-
-
-
-             </style>
-                 <div id="mySidenavLog" class="sidenav">
-                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
-              
-                 <a style="color: #f1f1f1; background-color: #4caf50"> #{loginManagedBean.modelLogin.session.toUpperCase()}</a>
-                <h:form>
-                    #{loginManagedBean.modelLogin.firstAccessAdminPage = false}
-                    <a href="AdminPage/QLKhachHang.xhtml">Quản lý</a>
-                    
-                     <a href="#">Chi tiết</a>
-                     <a href="#">Đổi mật khẩu</a>
-                     <h:commandLink action="#{loginManagedBean.logout()}">Đăng xuất</h:commandLink>
+                    <h:commandLink class="navbar-brand" action ="Home.xhtml?faces-redirect=true" style="margin-top:0.1cm"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</h:commandLink>
                 </h:form>
-                 </div>
-               <script>
 
-                     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-                     function openNav1() {
-                         document.getElementById("mySidenavLog").style.width = "280px";
-
-                     }
-
-                     /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-                     function closeNav1() {
-                         document.getElementById("mySidenavLog").style.width = "0";
-
-                     }
-
-
-                 </script>
-
-                   
-               
-                
-                
-            </c:otherwise>
-        </c:choose>
-       
-       
-    </ul>
-    <!--Brand icon-->
-
-    <script>
-        //Animation header
-        $(document).ready(function () {
-            $('.dropdown').hover(
-                function () {
-                    $(this).children('.dropdown-toggle').animate({
-                        fontSize: '20px'
-
-                    }, 500);
-
-                    $(this).children('.dropdown-menu').slideDown(400);
-
-                },
-                function () {
-                    $(this).children('.dropdown-toggle').animate({
-                        fontSize: '14px'
-
-                    }, 500);
-
-                    $(this).children('.dropdown-menu').slideUp(400);
-                }
-            );
-        });
-    </script>
-
-
-
-
-
-
-
-
-    <!--Menu-->
-    <link href="./resources/CSS/Header.css" rel="stylesheet" />
-    <script src="./resources/JQuery/Header.js"></script>
-    <!--Header-->
-	
-	
-    
-    
-    <ui:insert name ="content"/>
-   
-   
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-   
-
-    
-  
-
-    <!--Nút top-->
-    <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow7.js"></script>
-    <!--Nút top-->
-    <!--Footer-->
-    <footer class="footer-distributed" id="footer">
-
-        <div class="footer-left">
-
-            <h3>Fashion<span>store</span></h3>
-
-            <p class="footer-links">
-                <a href="#">Home</a>
-                ·
-                <a href="#">Blog</a>
-                ·
-                <a href="#">Pricing</a>
-                ·
-                <a href="#">About</a>
-                ·
-                <a href="#">Faq</a>
-                ·
-                <a href="#">Contact</a>
-            </p>
-
-            <p class="footer-company-name">Company Name &copy; 2015</p>
-            <p class="footer-company-name">Phone : 0909465621</p>
-            <p class="footer-company-name">Address : Phường Linh Trung, Q. Thủ Đức, UIT</p>
-
-            <div class="footer-icons">
-
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
 
             </div>
 
-        </div>
 
-        <div class="footer-right">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
 
-            <p>Contact Us</p>
+                    <!--Quần-->
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Quan.png" width="32" height="32" /> Quần <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Quần tây</a></li>
+                                    <li><a href="#">Quần jean</a></li>
+                                    <li><a href="#">Quần kaki</a></li>
+                                    <li><a href="#">Quần lửng</a></li>
+                                    <li><a href="#">Khác..</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Quần short</a></li>
+                                    <li><a href="#">Váy Đầm</a></li>
+                                    <li><a href="#">Quần lót</a></li>
+                                    <li><a href="#">Khác..</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Áo-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Ao.png" width="32" height="32" />Áo <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
 
 
-            <form action="#" method="post">
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Áo sơ mi</a></li>
+                                    <li><a href="#">Áo thun</a></li>
+                                    <li><a href="#">Áo khoác</a></li>
+                                    <li><a href="#">Áo vest</a></li>
+                                    <li><a href="#">Khác..</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Áo Sơ mi</a></li>
+                                    <li><a href="#">Áo thun</a></li>
+                                    <li><a href="#">Áo len</a></li>
+                                    <li><a href="#">Áo khoác</a></li>
+                                    <li><a href="#">Khác..</a></li>
 
-                <input type="text" name="email" placeholder="Email" />
-                <textarea name="message" placeholder="Message"></textarea>
-                <button>Send</button>
 
-            </form>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--Theo bộ-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Bo.png" width="32" height="32" />Theo bộ <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fa fa-male" aria-hidden="true"></i> Phái nam</a></li>
+                            <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ</a></li>
 
-        </div>
+                        </ul>
+                    </li>
+                    <!--Phụ kiện-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Phukien.png" width="32" height="32" />Phụ kiện <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
 
-    </footer>
-    <link rel="stylesheet" href="./resources/CSS/footer-distributed-with-contact-form.css"/>
-    <!--Footer-->
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male" aria-hidden="true"></i> Phái nam </a>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="#">Vớ nam</a></li>
+                                    <li><a href="#">Dây nịt</a></li>
+                                    <li><a href="#">Khác..</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female" aria-hidden="true"></i> Phái nữ </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Vớ</a></li>
+                                    <li><a href="#">Vòng đeo tay</a></li>
+                                    <li><a href="#">Thắt lưng</a></li>
+                                    <li><a href="#">Khác..</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!--Giới thiệu-->
+                    <li class="dropdown">
+                        <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Gioithieu.png" width="32" height="32" />Giới thiệu </a>
+                    </li>
+                    <!--Liên hệ-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="./resources/Image/Lienhe.png" width="32" height="32" />Liên hệ </a>
+                    </li>
+
+                </ul>
 
 
 
 
-    <script src="./resources/JQuery/SetWidthOnStart.js"></script>
+                <!--Search button-->
+                <button id="searchbtn" type="button" class="btn btn-success" style = "float:right;margin-top:0.3cm;margin-right:0.2cm; background-color:transparent">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
 
-    <!--Scollbar style-->
-    <style>
-        /* Let's get this party started */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+                <script type="text/javascript">
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-        }
+                    var hide = true;
+                    $('#searchbtn').click(function () {
 
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-            background: rgba(255,0,0,0.8);
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-        }
+                        if (hide === false) {
+
+                            $('#search').animate({
+                                opacity: '0',
+                                width: '0'
+                            });
+                            hide = true;
+
+                        } else {
+
+                            $('#search').animate({
+                                opacity: '1',
+                                width: '500px'
+                            });
+                            $('#textsearch').focus();
+
+                            hide = false;
+                        }
+                    });
+                </script>
+                <!--Search button-->
+
+                <div class="col-xs-3" style="float:right;width:0px;opacity:0;margin-top:0.2cm;position:absolute" id="search" >
+                    <input id="textsearch" class="form-control" type="text" style=" background:rgba(0, 0, 0, 10) ;color:white" placeholder="Search...."/>
+                </div>
+
+                <img src="./resources/Image/SDT.png" style="float:right;margin-top:0.25cm;margin-right:0.2cm"  width="150" />
+                <a style="float: right; margin-top: 0.4cm; margin-right: 0.2cm; background-color: transparent; color: #fff"><img src="./resources/Image/cart.png" width="32" height="32" /> Giỏ hàng : Trống</a>
+
+
+            </div><!-- /.navbar-collapse -->
+
+
+
+
+        </nav>
+        <br /><br /><br />
+        <!--Brand icon-->
+        <ul class="topnav" style="background-image:url('./resources/Image/heade.png');height:130px;" id="topbackground" >
+            <c:choose>
+                <c:when test="#{loginManagedBean.modelLogin.session == null}">
+                    <h:form>
+
+                        <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(false)}"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</h:commandLink></li>
+                        <li style="float:right"><h:commandLink action="#{loginManagedBean.directpagedangky(true)}"><i class="fa fa-user-plus" aria-hidden="true"></i> Đăng ký</h:commandLink></li>
+                    </h:form>
+
+                </c:when>
+                <c:otherwise>
+
+                    <li style="float:right"><a style="cursor:pointer" onclick="openNav1()" ><i  aria-hidden="true"></i>Xin chào, #{loginManagedBean.modelLogin.session.toUpperCase()} <b class="fa fa-caret-right"></b></a></li>
+
+                    <!--Sidebar-->
+                    <style>
+
+                        .sidenav {
+                            height: 100%; /* 100% Full-height */
+                            width: 0; /* 0 width - change this with JavaScript */
+                            position: fixed; /* Stay in place */
+                            z-index: 1; /* Stay on top */
+                            top: 0;
+                            right: 0;
+                            background-color: #111; /* Black*/
+                            overflow-x: hidden; /* Disable horizontal scroll */
+                            padding-top: 60px; /* Place content 60px from the top */
+                            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+                        }
+
+                        .sidenav a {
+                            padding: 8px 8px 8px 32px;
+                            text-decoration: none;
+                            font-size: 25px;
+                            color: #818181;
+                            display: block;
+                            transition: 0.3s;
+
+                        }
+
+                        .sidenav a:hover, .offcanvas a:focus {
+                            color: #f1f1f1;
+                        }
+
+                        .sidenav .closebtn {
+                            position: absolute;
+                            top: 1.4cm;
+                            right: 25px;
+                            font-size: 36px;
+                            margin-left: 50px;
+                        }
+
+
+
+                    </style>
+                    <div id="mySidenavLog" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+
+                        <a style="color: #f1f1f1; background-color: #4caf50"> #{loginManagedBean.modelLogin.session.toUpperCase()}</a>
+                        <h:form>
+                            #{loginManagedBean.modelLogin.firstAccessAdminPage = false}
+                            <a href="AdminPage/QLKhachHang.xhtml">Quản lý</a>
+
+                            <a href="#">Chi tiết</a>
+                            <a href="#">Đổi mật khẩu</a>
+                            <h:commandLink action="#{loginManagedBean.logout()}">Đăng xuất</h:commandLink>
+                        </h:form>
+                    </div>
+                    <script>
+
+                        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+                        function openNav1() {
+                            document.getElementById("mySidenavLog").style.width = "280px";
+
+                        }
+
+                        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+                        function closeNav1() {
+                            document.getElementById("mySidenavLog").style.width = "0";
+
+                        }
+
+
+                    </script>
+
+
+
+
+
+                </c:otherwise>
+            </c:choose>
+
+
+        </ul>
+        <!--Brand icon-->
+
+        <script>
+            //Animation header
+            $(document).ready(function () {
+                $('.dropdown').hover(
+                        function () {
+                            $(this).children('.dropdown-toggle').animate({
+                                fontSize: '20px'
+
+                            }, 500);
+
+                            $(this).children('.dropdown-menu').slideDown(400);
+
+                        },
+                        function () {
+                            $(this).children('.dropdown-toggle').animate({
+                                fontSize: '14px'
+
+                            }, 500);
+
+                            $(this).children('.dropdown-menu').slideUp(400);
+                        }
+                );
+            });
+        </script>
+
+
+
+
+
+
+
+
+        <!--Menu-->
+        <link href="./resources/CSS/Header.css" rel="stylesheet" />
+        <script src="./resources/JQuery/Header.js"></script>
+        <!--Header-->
+
+
+
+
+        <ui:insert name ="content"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--Nút top-->
+        <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow7.js"></script>
+        <!--Nút top-->
+        <!--Footer-->
+        <footer class="footer-distributed" id="footer">
+
+            <div class="footer-left">
+
+                <h3>Fashion<span>store</span></h3>
+
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    ·
+                    <a href="#">Blog</a>
+                    ·
+                    <a href="#">Pricing</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Faq</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+
+                <p class="footer-company-name">Company Name &copy; 2015</p>
+                <p class="footer-company-name">Phone : 0909465621</p>
+                <p class="footer-company-name">Address : Phường Linh Trung, Q. Thủ Đức, UIT</p>
+
+                <div class="footer-icons">
+
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p>Contact Us</p>
+
+
+                <form action="#" method="post">
+
+                    <input type="text" name="email" placeholder="Email" />
+                    <textarea name="message" placeholder="Message"></textarea>
+                    <button>Send</button>
+
+                </form>
+
+            </div>
+
+        </footer>
+        <link rel="stylesheet" href="./resources/CSS/footer-distributed-with-contact-form.css"/>
+        <!--Footer-->
+
+
+
+
+        <script src="./resources/JQuery/SetWidthOnStart.js"></script>
+
+        <!--Scollbar style-->
+        <style>
+            /* Let's get this party started */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+                background: rgba(255,0,0,0.8);
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+            }
 
             ::-webkit-scrollbar-thumb:window-inactive {
                 background: rgba(255,0,0,0.4);
             }
-    </style>
+        </style>
 
-    <div class="general_social_icons">
-        <nav class="social">
-            <ul>
-                <li class="w3_twitter"><a href="#">Twitter <i class="fa fa-twitter"></i></a></li>
-                <li class="w3_facebook"><a href="#">Facebook <i class="fa fa-facebook"></i></a></li>
-                <li class="w3_dribbble"><a href="#">Dribbble <i class="fa fa-dribbble"></i></a></li>
-                <li class="w3_g_plus"><a href="#">Google+ <i class="fa fa-google-plus"></i></a></li>
-            </ul>
-        </nav>
-    </div>
+        <div class="general_social_icons">
+            <nav class="social">
+                <ul>
+                    <li class="w3_twitter"><a href="#">Twitter <i class="fa fa-twitter"></i></a></li>
+                    <li class="w3_facebook"><a href="#">Facebook <i class="fa fa-facebook"></i></a></li>
+                    <li class="w3_dribbble"><a href="#">Dribbble <i class="fa fa-dribbble"></i></a></li>
+                    <li class="w3_g_plus"><a href="#">Google+ <i class="fa fa-google-plus"></i></a></li>
+                </ul>
+            </nav>
+        </div>
     </h:body>
 </html>
 
