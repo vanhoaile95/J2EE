@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/src/java/Controller/ThongKeBean.java</file>
-            <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/web/AdminPage/assets/css/tableStyle.css</file>
             <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/web/AdminPage/ThongKeDoanhSo.xhtml</file>
+            <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/web/AdminPage/QLKhachHang.xhtml</file>
             <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/web/AdminPage/AdminLayout.xhtml</file>
-            <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/src/java/Controller/printBean.java</file>
+            <file>file:/C:/Users/Binh%20Nguyen/Documents/GitHub/J2EE/WebBanHangJSF/web/AdminPage/TonKho.xhtml</file>
         </group>
     </open-files>
 </project-private>

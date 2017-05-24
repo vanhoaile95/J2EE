@@ -11,8 +11,8 @@
         <ui:composition  template="AdminLayout.xhtml">
 
             <ui:define name="TacVu">
-                <li><a href="QLKhachHang.xhtml">Thống kê doanh thu</a></li>
-                <li><a href="">Thống kê doanh số</a></li>               
+                <li><a href="QLKhachHang.xhtml">Thống kê doanh số bán ra </a></li>
+                <li><a href="TonKho.xhtml">Hàng hóa còn trong kho</a></li>               
             </ui:define>
             <ui:define name="script">   
             </ui:define>
@@ -21,8 +21,8 @@
             </ui:define>
             <ui:define name="content">   
 
-                <h:outputLabel styleClass="Head"> <h2>Thống kê doanh số tháng #{thongkeBean.modelThang.thoigian}</h2></h:outputLabel>
-                <h:dataTable value="#{thongkeBean.getThongKe()}" var="u" 
+                <h:outputLabel styleClass="Head"> <h2>Số hàng còn lại trong kho</h2></h:outputLabel>
+                <h:dataTable value="#{thongkeBean.getTonKho()}" var="u" border="1"
                              styleClass="table table-hover table-striped"
                              >
                     <h:column>
@@ -39,20 +39,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            Số lượng bán ra
+                            Số lượng hàng còn lại
                         </f:facet>
-                        #{u.SL}
+                        #{u.SLTonKho}
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Tổng tiền
-                        </f:facet>
-                        #{u.tongTien}
-                    </h:column>
+         
                 </h:dataTable>
-                <h:form>
-                    <h:commandButton value="In báo cáo" styleClass="printButton" action="#{printBean.inBaoCao()}"/>
-                </h:form>
             </ui:define>
 
         </ui:composition>

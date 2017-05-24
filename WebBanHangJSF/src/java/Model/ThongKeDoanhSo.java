@@ -20,6 +20,8 @@ public class ThongKeDoanhSo {
     private int SL;
     public String thoigian;
     private String MaSP;
+    private Float TongTien;
+    private int SLTonKho;
 
     public String getMaSP() {
         return MaSP;
@@ -27,6 +29,22 @@ public class ThongKeDoanhSo {
 
     public void setMaSP(String MaSP) {
         this.MaSP = MaSP;
+    }
+
+    public int getSLTonKho() {
+        return SLTonKho;
+    }
+
+    public void setSLTOnKho(int SLTonKho) {
+        this.SLTonKho = SLTonKho;
+    }
+
+    public Float getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(Float TongTien) {
+        this.TongTien = TongTien;
     }
 
     public String getTenSP() {
