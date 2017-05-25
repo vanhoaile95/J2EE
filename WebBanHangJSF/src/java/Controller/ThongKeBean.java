@@ -79,7 +79,6 @@ public class ThongKeBean implements Serializable {
 
         ConnectSQL Db = new ConnectSQL();
         Connection conn = Db.getConnectDB();
-        String date=  String.valueOf(java.time.LocalDate.now());
         ResultSet rs;
         String query = "execute ThongKe '" + java.time.LocalDate.now()+ "'";
         try {
