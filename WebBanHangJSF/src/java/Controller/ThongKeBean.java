@@ -49,22 +49,55 @@ public class ThongKeBean implements Serializable {
 
         ResultSet rs;
         String a = this.Thang.thoigian;
-        String query = "execute ThongKeDoanhSo '" + this.Thang.thoigian + "'";
+        String query = "execute ThongKe '" + this.Thang.thoigian + "'";
         try {
             Statement stm = conn.createStatement();
             rs = stm.executeQuery(query);
             while (rs.next()) {
                 ThongKeDoanhSo tk = new ThongKeDoanhSo();
-                String MaSP=rs.getString("MaSP");
+                String MaSP = rs.getString("MaSP");
                 String TenSP = rs.getString("TenSP");
                 int SL = rs.getInt("SL");
+                float TT = rs.getFloat("TT");
+
                 tk.setMaSP(MaSP);
                 tk.setTenSP(TenSP);
                 tk.setSL(SL);
+                tk.setTongTien(TT);
                 list.add(tk);
             }
         } catch (SQLException e) {
-            
+
+        }
+        
+        return list;
+
+    }
+
+    public List<ThongKeDoanhSo> getTonKho() {
+        List<ThongKeDoanhSo> list = new ArrayList<ThongKeDoanhSo>();
+
+        ConnectSQL Db = new ConnectSQL();
+        Connection conn = Db.getConnectDB();
+        String date=  String.valueOf(java.time.LocalDate.now());
+        ResultSet rs;
+        String query = "execute ThongKe '" + java.time.LocalDate.now()+ "'";
+        try {
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(query);
+            while (rs.next()) {
+                ThongKeDoanhSo tk = new ThongKeDoanhSo();
+                String MaSP = rs.getString("MaSP");
+                String TenSP = rs.getString("TenSP");
+                int SL = rs.getInt("Ton");
+
+                tk.setMaSP(MaSP);
+                tk.setTenSP(TenSP);
+                tk.setSLTOnKho(SL);
+                list.add(tk);
+            }
+        } catch (SQLException e) {
+
         }
 
         return list;

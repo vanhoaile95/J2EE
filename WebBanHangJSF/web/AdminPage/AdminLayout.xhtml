@@ -225,10 +225,12 @@
                                         <ui:insert name ="Header"/>
                                     </div>
                                     <div class="content">
-                                        <div id="chartHours" class="ct-chart">
+                                        <div >
                                             <ui:insert name ="content"/>
                                         </div>
-                                        <div class="footer">
+                                        
+                                    </div>
+                                    <div class="footer">
                                             <hr/>
                                             <div class="stats">
                                                 <i class="pe-7s-stopwatch"></i><i> </i>
@@ -238,8 +240,11 @@
                                                 </h:outputText>
                                             </div>
                                         </div>
+<<<<<<< HEAD
 >>>>>>> 34e8cda9badd62f452c0f3ed18ca585667c7b62b
                                     </div>
+=======
+>>>>>>> fd50ac4bd806e352bc3ef34b90d26d32bd9ec3cf
                                 </div>
                             </div>
                         </div>
@@ -285,9 +290,9 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
-                                  $(function () {
-                                      $("#form\\:datepicker").datepicker();
-                                  });
+                                $(function () {
+                                    $("#form\\:datepicker").datepicker({ });
+                                });
         </script>
 
         <c:choose>
