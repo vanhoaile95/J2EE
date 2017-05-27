@@ -51,13 +51,6 @@ public class LoginManagedBean implements Serializable{
     public void setModelLogin(Login ModelLogin) {
         this.ModelLogin = ModelLogin;
     }
-
-
-
-  
-   
-
-   
     
     private void redirect(String page)
     {
