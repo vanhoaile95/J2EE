@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,15 @@ import javax.servlet.http.HttpSession;
 public class DonHangManagedBean implements Serializable {
 
     private DonHang donHang;
-    
+    private String TrangThai;
+
+    public void setTrangThai(String TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
+    public String getTrangThai() {
+        return TrangThai;
+    }
 
     public DonHang getDonHang() {
         return donHang;
@@ -45,6 +54,7 @@ public class DonHangManagedBean implements Serializable {
     
     public String DonHangList()
     {
+        this.donHang.init("");
         return "QLDonHang";
     }
     
@@ -66,22 +76,24 @@ public class DonHangManagedBean implements Serializable {
     
     
     
-    public String DonHangSave()
+    public String DonHangSave()//insert
     {
         //nhập danh sách sản phẩm vào đơn hàng (listSP)
         HttpSession sesion=Util.getSession();
             HttpServletRequest request = 
             Util.getRequest();
-//            String value = FacesContext.getCurrentInstance().
-//		getExternalContext().getRequestParameterMap().get("ten");
-//	    donHang.setTinhKH(value);
+            
+        if(this.donHang.insert())
+        {
+            return "Order";
+        }
         
         System.err.println("ten: "+donHang.getTenKH());
         System.err.println("so dt: "+donHang.getSoDTKH());
         System.err.println("dia chi: "+donHang.getDiaChiKH());
         System.err.println("Tinh:  "+donHang.getTinhKH());
         System.err.println("huyen: "+donHang.getHuyenKH());
-        return "Order";
+        return "Home";
     }
     
     public String action()
@@ -93,12 +105,30 @@ public class DonHangManagedBean implements Serializable {
     public String DonHangDelete(String maDH)
     {
         //xử lý trạng thái
+        HttpSession sesion=Util.getSession();
+            HttpServletRequest request = Util.getRequest();
+            String usename=(String)sesion.getAttribute("username");
+            System.out.println("ten dang nhap:   "+ usename);
+            if(this.donHang.save("1", usename, maDH))
+            {
+                this.donHang.init("");
+            }
+            
         return "QLDonHang";
     }
     
      public String DonHangDuyet(String maDH)
     {
         //xử lý trạng thái
+       HttpSession sesion=Util.getSession();
+            HttpServletRequest request = Util.getRequest();
+            String usename=(String)sesion.getAttribute("username");
+            System.out.println("ten dang nhap:   "+ usename);
+            if(this.donHang.save("2", usename, maDH))
+            {
+                this.donHang.init("");
+            }
+            
         return "QLDonHang";
     }
     
@@ -108,10 +138,10 @@ public class DonHangManagedBean implements Serializable {
         return "QLDonHang";
     }
     
-    public String TimKiem(String TrangThai)
+    public String TimKiem(ValueChangeEvent event)
     {
-        System.out.println("trạng thiais tìm kiếm: "+TrangThai);
-        //this.donHang.init("");
+        System.out.println("trạng thiais tìm kiếm: "+event.getNewValue());
+        this.donHang.TimKiem(event.getNewValue().toString());
         return "QLDonHang";
     }
     

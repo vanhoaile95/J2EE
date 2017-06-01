@@ -217,7 +217,7 @@ public class DonHang {
         if(MaDH.equals(""))
         {
             String query="select dh.MaDonHang,us.HoTen,dh.NgayDonHang,dh.TienTamTinh,dh.TienVanChuyen,dh.TongTien,dh.TrangThai from DonHang dh\n" +
-                            " inner join UserDetail us on us.ID=dh.IDUser";
+                            " inner join NhanVien us on us.MaNV=dh.MaNV";
             System.out.println("init query:   "+query);
             dataRs=db.get(query);
             int i=1;
@@ -244,7 +244,7 @@ public class DonHang {
         else
         {
             String query="select dh.*, us.HoTen from DonHang dh\n" +
-                            "inner join UserDetail us on us.ID=dh.IDUser\n" +
+                            "inner join NhanVien us on us.MaNV=dh.MaNV\n" +
                             "where dh.MaDonHang='"+MaDH+"'";
             System.out.println("init query:   "+query);
             dataRs=db.get(query);
@@ -333,8 +333,26 @@ public class DonHang {
     }
     public Boolean insert()
     {
+        ResultSet maDHRs=(new dbutils()).get("select count(*) as count from DonHang");
+        try
+        {
+            while(maDHRs.next())
+            {
+                this.maDH="DH"+String.valueOf(maDHRs.getLong("count")+1);
+            }
+        }
+        catch(Exception e)
+                {
+                    e.printStackTrace();
+                    return false;
+                }
+        
+        
         dbutils db=new dbutils();
-        String sql="";
+        
+        String sql="insert into DonHang(MaDonHang,NgayDonHang,TienTamTinh,TienVanChuyen,TongTien,TrangThai,TenKH,TinhKH,HuyenKH,DiaChiKH,SoDTKH) \n" +
+"			values ('"+this.maDH+"',GETDATE(),'"+this.tienTamTinh+"','"+this.tienVanChuyen+"','"+this.tongTien+"', \n"+
+                                    "'0',N'"+this.tenKH+"',N'"+this.tinhKH+"',N'"+this.huyenKH+"',N'"+this.diaChiKH+"','"+this.SoDTKH+"')";
         System.out.println(sql);
                     try 
 			{
@@ -345,7 +363,19 @@ public class DonHang {
 					
 					return false;
 				}
+                                for(SanPhamDH sp:this.listSP)
+                                {
+                                    String sql2="insert into DonHangDetail(MaDonHang,MaSP,SoLuongMua,DonGia,ThanhTien) \n"+
+                                            "values ('"+this.maDH+"','"+sp.getMaSP()+"','"+sp.getSoluong()+"','"+sp.getGiaSP()+"','"+sp.getThanhTien()+"')";
+                                    System.out.println(sql2);
+                                    if(!db.update(sql2))
+                                    {	
+                                            db.update("rollback");
 
+                                            return false;
+                                    } 
+                                }
+                               
 				db.getConnection().commit();
 				db.getConnection().setAutoCommit(true);
                                 db.shutDown();
@@ -361,10 +391,32 @@ public class DonHang {
                     
                             
     }
-    public Boolean save()
+    public Boolean save(String trangthai, String usename, String maDonHang)
     {
+        if(usename==null)
+        {
+            return false;
+        }
         dbutils db=new dbutils();
-        String sql="";
+        String sqlMNV="select nv.MaNV from NhanVien nv\n" +
+                        " inner join UserLogin us on us.ID=nv.ID\n" +
+                        " where us.Username='"+usename+"'";
+        System.out.println(sqlMNV);
+        ResultSet mavRs=db.get(sqlMNV);
+        String maNV="";
+        try {
+            while(mavRs.next())
+            {
+                maNV=mavRs.getString("MaNV");
+                
+            }
+            mavRs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        
+        String sql="update DonHang set TrangThai="+trangthai+" ,MaNV='"+maNV+"' where MaDonHang='"+maDonHang+"'";
         System.out.println(sql);
                     try 
 			{
@@ -389,5 +441,43 @@ public class DonHang {
                                 return false;
 			}
                     
+    }
+    
+    public void TimKiem(String trangthai)
+    {
+        List<DonHangBean> donhanlist=new ArrayList<DonHangBean>();
+        dbutils db=new dbutils();
+        ResultSet dataRs;
+        
+            String query="select dh.MaDonHang,us.HoTen,dh.NgayDonHang,dh.TienTamTinh,dh.TienVanChuyen,dh.TongTien,dh.TrangThai from DonHang dh\n" +
+                            " inner join UserDetail us on us.ID=dh.IDUser \n"+
+                               "where 1=1 ";
+            if(!trangthai.equals("3"))
+            {
+                query+="and dh.TrangThai="+trangthai;
+            }
+            System.out.println("init query tim kiếm :   "+query);
+            dataRs=db.get(query);
+            int i=1;
+            try {
+                while (dataRs.next())
+                {
+                    DonHangBean DonHang=new DonHangBean();
+                    DonHang.setSTT(String.valueOf(i++));
+                    DonHang.setMaDH(dataRs.getString("MaDonHang"));
+                    DonHang.setMaNV(dataRs.getString("HoTen"));
+                    DonHang.setNgayDH(dataRs.getString("NgayDonHang"));
+                    DonHang.setTienTamTinh(dataRs.getString("TienTamTinh"));
+                    DonHang.setTienVanChuyen(dataRs.getString("TienVanChuyen"));
+                    DonHang.setTongTien(dataRs.getString("TongTien"));
+                    DonHang.setTrangThai(dataRs.getString("TrangThai"));
+                    donhanlist.add(DonHang);
+                }
+                this.listDH=donhanlist;
+                dataRs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DonHang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
     }
 }

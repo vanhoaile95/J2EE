@@ -47,7 +47,7 @@
         Tip 2: you can also add an image using data-image tag
 
     -->
-
+    <h:form>
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a  class="simple-text">
@@ -63,10 +63,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <h:commandLink action="#{donHangManagedBean. DonHangList()}">
                          <i class="pe-7s-news-paper"></i>
                         <p>Quản lý hóa đơn</p>
-                    </a>
+                    </h:commandLink>
                 </li>
                 <li>
                     <a href="table.html">
@@ -78,6 +78,7 @@
 			
             </ul>
     	</div>
+        </h:form>
     </div>
 
     <div class="main-panel">

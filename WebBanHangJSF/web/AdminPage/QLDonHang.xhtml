@@ -26,11 +26,11 @@
                         <div class="form-group">
                             
                             <label for="sel1">Trạng Thái</label>
-                            <h:selectOneMenu class="form-control"  style="width: 200px" onchange="submit()" valueChangeListener="#{donHangManagedBean.TimKiem(this.value)}">
+                            <h:selectOneMenu class="form-control"  style="width: 200px" value="#{donHangManagedBean.trangThai}" onchange="submit()" valueChangeListener="#{donHangManagedBean.TimKiem}">
                                 <f:selectItem itemValue="3" itemLabel="Tất Cả" ></f:selectItem>
-                                <f:selectItem itemValue="0" itemLabel="Chưa Duyệt" ></f:selectItem>
-                                <f:selectItem itemValue="2" itemLabel="Đã Duyệt" ></f:selectItem>
-                                <f:selectItem itemValue="1" itemLabel="Đã Xóa" ></f:selectItem>
+                                <f:selectItem itemValue="0" itemLabel="Chưa Duyệt"  ></f:selectItem>
+                                <f:selectItem itemValue="2" itemLabel="Đã Duyệt"  ></f:selectItem>
+                                <f:selectItem itemValue="1" itemLabel="Đã Xóa"  ></f:selectItem>
                             </h:selectOneMenu>
                             
                             
@@ -57,7 +57,21 @@
                                         	<td>#{DonHang.maDH}</td>
                                                 <td> #{DonHang.ngayDH}</td>
                                                 <td >#{DonHang.tongTien} VNĐ</td>
-                                                <td>#{DonHang.trangThai}</td>
+                                                <td>
+                                                    <c:choose>
+                                                    <c:when test="#{DonHang.trangThai== '0'}">
+                                                       Chưa duyệt         
+                                                          
+                                                    </c:when>
+                                                    <c:when test="#{DonHang.trangThai== '1'}">
+
+                                                       Đã xóa
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        Đã duyệt
+                                                    </c:otherwise>
+                                                   </c:choose>
+                                                </td>
                                         	<td >#{DonHang.maNV}</td>
                                                 <td >
                                                     <c:choose>
